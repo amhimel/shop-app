@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 
 class BottmNavWidget extends StatelessWidget {
-  const BottmNavWidget({super.key});
+  const BottmNavWidget({super.key, this.onTap, this.icon});
+
+  final void Function()? onTap;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: SizedBox(
         height: 36,
         width: 36,
-        child: Icon(Ionicons.home, color: Colors.white),
+        child: Icon(icon, color: Colors.white),
       ),
     );
   }
