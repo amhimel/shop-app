@@ -1,0 +1,605 @@
+[
+  {
+    "id": "0",
+    "name": "CloudRunner",
+    "category": "Women's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "129.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "109.99",
+    "description": "Experience exceptional comfort with the Nike Air Zoom Pegasus 40 Women's Running Shoes. Features responsive Nike Air cushioning for smooth transitions and impact protection. Engineered mesh upper provides breathability and adaptive fit. Waffle-pattern outsole delivers reliable traction. Perfect for daily training runs and long-distance comfort.",
+    "title": "Nike Air Zoom Pegasus 40 Women's Running Shoes"
+  },
+  {
+    "id": "1",
+    "name": "UltraGlide",
+    "category": "Women's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "189.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "169.99",
+    "description": "The Adidas Ultraboost 23 Women's Running Shoes deliver premium energy return with responsive Boost midsole technology. Primeknit+ upper adapts to your foot for a personalized fit. Continental rubber outsole provides superior grip in all conditions. Designed specifically for women's biomechanics for optimal performance.",
+    "title": "Adidas Ultraboost 23 Women's Running Shoes"
+  },
+  {
+    "id": "2",
+    "name": "TrailQuest",
+    "category": "Women's Trail",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "139.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "119.99",
+    "description": "Conquer rugged terrain with the Salomon Speedcross 5 Women's Trail Running Shoes. Aggressive lug pattern provides exceptional grip on technical trails. Quicklace system for easy adjustment and secure fit. SensiFit technology cradles the foot. Water-resistant construction protects against wet conditions. Built for adventurous trail runners.",
+    "title": "Salomon Speedcross 5 Women's Trail Running Shoes"
+  },
+  {
+    "id": "3",
+    "name": "ChicStep",
+    "category": "Women's Casual",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "89.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "74.99",
+    "description": "The Puma Carina 2.0 Women's Sneakers combine classic style with modern comfort. Premium synthetic leather upper offers durability and sleek appearance. Cushioned midsole provides all-day comfort. Low-profile design with platform sole adds subtle height. Perfect for casual outings, shopping, and everyday wear with versatile styling options.",
+    "title": "Puma Carina 2.0 Women's Sneakers"
+  },
+  {
+    "id": "4",
+    "name": "FlexFit",
+    "category": "Women's Training",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "109.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "94.99",
+    "description": "The Nike Metcon 9 Women's Training Shoes are engineered for high-intensity workouts. Wide, flat heel provides stability for weightlifting. Responsive foam cushioning for dynamic movements. Durable rubber traction pattern supports multidirectional training. Breathable upper keeps feet cool. Ideal for CrossFit, HIIT, and strength training sessions.",
+    "title": "Nike Metcon 9 Women's Training Shoes"
+  },
+  {
+    "id": "5",
+    "name": "ComfortWalk",
+    "category": "Women's Walking",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "79.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "64.99",
+    "description": "The Skechers Go Walk Joy Women's Walking Shoes deliver lightweight comfort for all-day wear. 5GEN cushioning provides responsive feedback. Breathable athletic mesh upper. Goga Mat insole adds plush comfort. Flexible traction outsole. Perfect for walking, travel, errands, and casual activities requiring extended standing or walking.",
+    "title": "Skechers Go Walk Joy Women's Walking Shoes"
+  },
+  {
+    "id": "6",
+    "name": "StyleStep",
+    "category": "Women's Casual",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "99.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "84.99",
+    "description": "The Vans Old Skool Women's Sneakers are an iconic classic with timeless appeal. Durable canvas and suede upper. Signature side stripe design. Padded collar for comfort and support. Waffle rubber outsole provides excellent grip. Versatile style pairs perfectly with jeans, dresses, or athletic wear for effortless casual fashion.",
+    "title": "Vans Old Skool Women's Sneakers"
+  },
+  {
+    "id": "7",
+    "name": "FreshBounce",
+    "category": "Women's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "159.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "139.99",
+    "description": "The New Balance Fresh Foam X 1080v13 Women's Running Shoes offer premium cushioning and comfort. Fresh Foam X midsole provides plush, ultra-cushioned ride. Hypoknit upper delivers targeted stretch and support. Engineered for women's specific biomechanics. Durable rubber outsole ensures reliable traction. Perfect for neutral runners seeking maximum comfort.",
+    "title": "New Balance Fresh Foam X 1080v13 Women's Running Shoes"
+  },
+  {
+    "id": "8",
+    "name": "AgilityPro",
+    "category": "Women's Training",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/womens_shoes02.jpg"
+    ],
+    "oldPrice": "119.99",
+    "sizes": [
+      {
+        "size": "5",
+        "isSelected": false
+      },
+      {
+        "size": "5.5",
+        "isSelected": false
+      },
+      {
+        "size": "6",
+        "isSelected": false
+      },
+      {
+        "size": "6.5",
+        "isSelected": false
+      },
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      }
+    ],
+    "price": "104.99",
+    "description": "The Reebok Nano X3 Women's Training Shoes are built for versatile gym performance. Flexweave knit upper provides breathability and flexibility. Floatride Energy Foam cushioning offers responsive comfort. Wide toe box allows natural foot splay. Durable rubber outsole handles rope climbs and floor work. Excellent for CrossFit and functional fitness training.",
+    "title": "Reebok Nano X3 Women's Training Shoes"
+  }
+]

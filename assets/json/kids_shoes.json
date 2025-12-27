@@ -1,0 +1,210 @@
+[
+  {
+    "id": "0",
+    "name": "SpeedKid",
+
+    "category": "Kids' Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes02.jpg"
+    ],
+    "oldPrice": "64.99",
+    "sizes": [
+      {
+        "size": "10.5C",
+        "isSelected": false
+      },
+      {
+        "size": "11C",
+        "isSelected": false
+      },
+      {
+        "size": "11.5C",
+        "isSelected": false
+      },
+      {
+        "size": "12C",
+        "isSelected": false
+      },
+      {
+        "size": "12.5C",
+        "isSelected": false
+      },
+      {
+        "size": "13C",
+        "isSelected": false
+      },
+      {
+        "size": "1Y",
+        "isSelected": false
+      },
+      {
+        "size": "2Y",
+        "isSelected": false
+      },
+      {
+        "size": "3Y",
+        "isSelected": false
+      }
+    ],
+    "price": "54.99",
+    "description": "Keep your young runner comfortable with the Nike Revolution 7. Features lightweight cushioning and durable construction perfect for active kids. Soft foam midsole provides comfort for all-day wear. Rubber outsole offers traction on various surfaces. Easy on and off design with secure lace closure. Perfect for school, play, and sports activities.",
+    "title": "Nike Revolution 7 Kids' Running Shoes"
+  },
+  {
+    "id": "1",
+    "name": "FlexRunKid",
+
+    "category": "Kids' Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes02.jpg"
+    ],
+    "oldPrice": "59.99",
+    "sizes": [
+      {
+        "size": "10C",
+        "isSelected": false
+      },
+      {
+        "size": "10.5C",
+        "isSelected": false
+      },
+      {
+        "size": "11C",
+        "isSelected": false
+      },
+      {
+        "size": "11.5C",
+        "isSelected": false
+      },
+      {
+        "size": "12C",
+        "isSelected": false
+      },
+      {
+        "size": "12.5C",
+        "isSelected": false
+      },
+      {
+        "size": "13C",
+        "isSelected": false
+      },
+      {
+        "size": "1Y",
+        "isSelected": false
+      },
+      {
+        "size": "2Y",
+        "isSelected": false
+      }
+    ],
+    "price": "49.99",
+    "description": "The Adidas Kids' Duramo SL Running Shoes are designed for young athletes who need comfort and support during their activities. Featuring a breathable mesh upper, cushioned midsole, and durable rubber outsole, these shoes provide all-day comfort and traction. The lace-up closure ensures a secure fit, making them perfect for school, play, and sports.",
+    "title": "Adidas Kids' Duramo SL Running Shoes"
+  },
+  {
+    "id": "2",
+    "name": "TrailBlazeKid",
+
+    "category": "Kids' Trail",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes02.jpg"
+    ],
+    "oldPrice": "69.99",
+    "sizes": [
+      {
+        "size": "10C",
+        "isSelected": false
+      },
+      {
+        "size": "10.5C",
+        "isSelected": false
+      },
+      {
+        "size": "11C",
+        "isSelected": false
+      },
+      {
+        "size": "11.5C",
+        "isSelected": false
+      },
+      {
+        "size": "12C",
+        "isSelected": false
+      },
+      {
+        "size": "12.5C",
+        "isSelected": false
+      },
+      {
+        "size": "13C",
+        "isSelected": false
+      },
+      {
+        "size": "1Y",
+        "isSelected": false
+      },
+      {
+        "size": "2Y",
+        "isSelected": false
+      }
+    ],
+    "price": "59.99",
+    "description": "The New Balance Kids' 410v7 Trail Running Shoes are perfect for young adventurers who love exploring the outdoors. Featuring a durable synthetic and mesh upper, cushioned midsole, and rugged outsole for traction on various terrains. The lace-up closure ensures a secure fit, making them ideal for trail running, hiking, and outdoor play.",
+    "title": "New Balance Kids' 410v7 Trail Running Shoes"
+  },
+  {
+    "id": "3",
+    "name": "StarRunnerKid",
+
+    "category": "Kids' Casual",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes01.jpg",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/kids_shoes02.jpg"
+    ],
+    "oldPrice": "49.99",
+    "sizes": [
+      {
+        "size": "10C",
+        "isSelected": false
+      },
+      {
+        "size": "10.5C",
+        "isSelected": false
+      },
+      {
+        "size": "11C",
+        "isSelected": false
+      },
+      {
+        "size": "11.5C",
+        "isSelected": false
+      },
+      {
+        "size": "12C",
+        "isSelected": false
+      },
+      {
+        "size": "12.5C",
+        "isSelected": false
+      },
+      {
+        "size": "13C",
+        "isSelected": false
+      },
+      {
+        "size": "1Y",
+        "isSelected": false
+      },
+      {
+        "size": "2Y",
+        "isSelected": false
+      }
+    ],
+    "price": "39.99",
+    "description": "The Puma Kids' Smash V2 Sneakers are stylish and comfortable shoes designed for everyday wear. Featuring a synthetic leather upper, cushioned midsole, and durable rubber outsole for traction. The lace-up closure ensures a secure fit, making them perfect for school, play, and casual outings.",
+    "title": "Puma Kids' Smash V2 Sneakers"
+  }
+]

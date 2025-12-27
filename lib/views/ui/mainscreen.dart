@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/controllers/main_screen_notifier_provider.dart';
 import 'package:shop_app/views/shared/bottom_nav.dart';
-import 'package:shop_app/views/shared/bottom_nav_widget.dart';
 import 'package:shop_app/views/ui/cart_page.dart';
 import 'package:shop_app/views/ui/home_page.dart';
 import 'package:shop_app/views/ui/profile_page.dart';
@@ -17,7 +16,6 @@ class Mainscreen extends StatelessWidget {
     HomePage(),
     CartPage(),
     ProfilePage(),
-    
   ];
 
   @override
@@ -27,13 +25,10 @@ class Mainscreen extends StatelessWidget {
         int pageIndex = mainScreenProvider.pageIndex;
         return Scaffold(
           backgroundColor: Color(0xFFE2E2E2),
-
           body: pageList[pageIndex],
-
           bottomNavigationBar: const BottomNavBar(),
         );
       },
     );
   }
 }
-

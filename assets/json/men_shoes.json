@@ -1,0 +1,506 @@
+[
+  {
+    "id": "0",
+    "name": "AirStride",
+    "category": "Men's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "129.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "109.99",
+    "description": "Experience ultimate comfort and performance with the Nike Air Zoom Pegasus 40. Features responsive cushioning with Nike Air technology for smooth transitions. Engineered mesh upper provides breathability and support. Waffle-pattern outsole delivers excellent traction on various surfaces. Perfect for daily training runs and race day performance.",
+    "title": "Nike Air Zoom Pegasus 40 Men's Running Shoes"
+  },
+  {
+    "id": "1",
+    "name": "UltraBoost",
+    "category": "Men's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "189.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "169.99",
+    "description": "The Adidas Ultraboost 23 delivers exceptional energy return with its responsive Boost midsole technology. Primeknit+ upper adapts to your foot for a sock-like fit. Continental rubber outsole provides superior grip in wet and dry conditions. Ideal for runners seeking maximum comfort and performance on road surfaces.",
+    "title": "Adidas Ultraboost 23 Men's Running Shoes"
+  },
+  {
+    "id": "2",
+    "name": "TrailBlaze",
+    "category": "Men's Trail",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "139.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "119.99",
+    "description": "Conquer any terrain with the Salomon Speedcross 5 Trail Running Shoes. Aggressive lug pattern provides exceptional grip on muddy and technical trails. Quicklace system allows for easy on-and-off. SensiFit technology cradles the foot for a precise, secure fit. Water-resistant construction keeps feet dry in challenging conditions.",
+    "title": "Salomon Speedcross 5 Men's Trail Running Shoes"
+  },
+  {
+    "id": "3",
+    "name": "ClassicLeather",
+    "category": "Men's Casual",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "89.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "74.99",
+    "description": "The Reebok Classic Leather Sneakers offer timeless style with modern comfort. Premium leather upper provides durability and a sleek look. Cushioned EVA midsole delivers all-day comfort. Low-cut design allows for natural ankle movement. Perfect for everyday wear, casual outings, and versatile styling options.",
+    "title": "Reebok Classic Leather Men's Sneakers"
+  },
+  {
+    "id": "4",
+    "name": "CourtVision",
+    "category": "Men's Basketball",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "119.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "99.99",
+    "description": "Dominate the court with the Nike Precision VI Basketball Shoes. Features responsive foam cushioning for explosive movements. Durable leather and synthetic upper provides support and stability. Rubber outsole with multidirectional traction pattern enhances grip on indoor courts. Mid-top design offers ankle support without restricting movement.",
+    "title": "Nike Precision VI Men's Basketball Shoes"
+  },
+  {
+    "id": "5",
+    "name": "SpeedDemon",
+    "category": "Men's Training",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "109.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "94.99",
+    "description": "The Under Armour HOVR Phantom 3 Training Shoes are engineered for intense workouts and cross-training. UA HOVR technology provides zero-gravity feel and energy return. Breathable mesh upper with supportive overlays. Durable rubber outsole offers traction for multidirectional movements. Perfect for gym sessions, HIIT workouts, and athletic training.",
+    "title": "Under Armour HOVR Phantom 3 Men's Training Shoes"
+  },
+  {
+    "id": "6",
+    "name": "UrbanWalk",
+    "category": "Men's Casual",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "79.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "64.99",
+    "description": "The Skechers Go Walk Max Walking Shoes combine comfort and style for all-day wear. Ultra-lightweight and responsive 5GEN cushioning. Breathable athletic mesh upper. High-rebound cushioning provides responsive feedback. Flexible traction outsole. Ideal for walking, travel, and casual everyday activities.",
+    "title": "Skechers Go Walk Max Men's Walking Shoes"
+  },
+  {
+    "id": "7",
+    "name": "VelocityPro",
+    "category": "Men's Running",
+    "imageUrl": [
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes01.png",
+      "https://qkidfzttiljufcveural.supabase.co/storage/v1/object/public/shop_app/mens_shoes02.png"
+    ],
+    "oldPrice": "159.99",
+    "sizes": [
+      {
+        "size": "7",
+        "isSelected": false
+      },
+      {
+        "size": "7.5",
+        "isSelected": false
+      },
+      {
+        "size": "8",
+        "isSelected": false
+      },
+      {
+        "size": "8.5",
+        "isSelected": false
+      },
+      {
+        "size": "9",
+        "isSelected": false
+      },
+      {
+        "size": "9.5",
+        "isSelected": false
+      },
+      {
+        "size": "10",
+        "isSelected": false
+      },
+      {
+        "size": "10.5",
+        "isSelected": false
+      },
+      {
+        "size": "11",
+        "isSelected": false
+      },
+      {
+        "size": "11.5",
+        "isSelected": false
+      },
+      {
+        "size": "12",
+        "isSelected": false
+      },
+      {
+        "size": "13",
+        "isSelected": false
+      }
+    ],
+    "price": "139.99",
+    "description": "The New Balance Fresh Foam X 1080v13 delivers premium cushioning for serious runners. Fresh Foam X midsole provides ultra-cushioned comfort. Hypoknit upper offers targeted stretch and support. Durable rubber outsole ensures reliable traction. Designed for neutral runners seeking maximum comfort over long distances.",
+    "title": "New Balance Fresh Foam X 1080v13 Men's Running Shoes"
+  }
+]
