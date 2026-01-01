@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/services/helper.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
+import 'package:shop_app/views/shared/category_btn.dart';
 import 'package:shop_app/views/shared/custom_spacer.dart';
 import 'package:shop_app/views/shared/latest_shoes_widget.dart';
 
@@ -44,6 +45,13 @@ class _ProductByCardState extends State<ProductByCard>
     getKidsSneaker();
   }
 
+  List<String> brand = [
+    "assets/images/adidas.jpg",
+    'assets/images/gucci.jpg',
+    'assets/images/jordan.jpg',
+    'assets/images/nike.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +84,9 @@ class _ProductByCardState extends State<ProductByCard>
                           child: Icon(Icons.close, color: Colors.white),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            filter();
+                          },
                           child: Icon(Icons.tune, color: Colors.white),
                         ),
                       ],
@@ -130,6 +140,7 @@ class _ProductByCardState extends State<ProductByCard>
   }
 
   Future<dynamic> filter() {
+    double value = 100.0;
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -137,6 +148,7 @@ class _ProductByCardState extends State<ProductByCard>
       barrierColor: Colors.white54,
       builder: (context) => Container(
         height: MediaQuery.of(context).size.height * 0.82,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -159,7 +171,7 @@ class _ProductByCardState extends State<ProductByCard>
               height: MediaQuery.of(context).size.height * 0.70,
               child: Column(
                 children: [
-                  CustomSpacer(),
+                  SizedBox(height: 10,),
                   Text(
                     'Filter',
                     style: appstyle(40, FontWeight.bold, Colors.black),
@@ -169,7 +181,76 @@ class _ProductByCardState extends State<ProductByCard>
                     'Gender',
                     style: appstyle(20, FontWeight.bold, Colors.black),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
+                  Row(
+                    children: const [
+                      CategoryBtn(btnColor: Colors.black, label: 'Men'),
+                      CategoryBtn(btnColor: Colors.grey, label: 'Women'),
+                      CategoryBtn(btnColor: Colors.grey, label: 'Kids'),
+                    ],
+                  ),
+                  CustomSpacer(),
+                  Text(
+                    'Category',
+                    style: appstyle(20, FontWeight.w600, Colors.black),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      CategoryBtn(btnColor: Colors.black, label: 'Shoes'),
+                      CategoryBtn(btnColor: Colors.grey, label: 'Apparrels'),
+                      CategoryBtn(btnColor: Colors.grey, label: 'Accessories'),
+                    ],
+                  ),
+                  CustomSpacer(),
+                  Text(
+                    'Price',
+                    style: appstyle(20, FontWeight.w600, Colors.black),
+                  ),
+                  SizedBox(height: 10,),
+                  Slider(
+                    value: value,
+                    activeColor: Colors.black,
+                    thumbColor: Colors.black,
+                    inactiveColor: Colors.grey,
+                    max: 500,
+                    divisions: 50,
+                    label: value.toString(),
+                    onChanged: (double value) {},
+                  ),
+                  
+                  Text(
+                    'Brand',
+                    style: appstyle(20, FontWeight.w600, Colors.black),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    height: 80,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: brand.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                            ),
+                            child: Image.asset(
+                              brand[index],
+                              height: 60,
+                              width: 70,
+                              color: Colors.black,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
 import 'package:shop_app/views/shared/new_shoes.dart';
 import 'package:shop_app/views/shared/product_card.dart';
+import 'package:shop_app/views/ui/product_by_card.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key, required Future<List<Sneakers>> sneaker})
@@ -51,27 +52,35 @@ class HomeWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Latest Shoes',
-                    style: appstyle(22, FontWeight.bold, Colors.black),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'View All',
-                        style: appstyle(22, FontWeight.w500, Colors.black),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 22,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductByCard()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Latest Shoes',
+                      style: appstyle(22, FontWeight.bold, Colors.black),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'View All',
+                          style: appstyle(22, FontWeight.w500, Colors.black),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 22,
+                          color: Colors.black,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

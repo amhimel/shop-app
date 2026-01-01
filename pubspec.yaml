@@ -66,6 +66,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/top_image.png
+    - assets/images/adidas.jpg
+    - assets/images/gucci.jpg
+    - assets/images/jordan.jpg
+    - assets/images/nike.jpg
     - assets/json/kids_shoes.json
     - assets/json/men_shoes.json
     - assets/json/women_shoes.json
