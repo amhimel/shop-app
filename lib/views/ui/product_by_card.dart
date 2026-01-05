@@ -7,7 +7,9 @@ import 'package:shop_app/views/shared/custom_spacer.dart';
 import 'package:shop_app/views/shared/latest_shoes_widget.dart';
 
 class ProductByCard extends StatefulWidget {
-  const ProductByCard({super.key});
+  const ProductByCard({super.key, required this.tabIndex});
+
+  final int tabIndex;
 
   @override
   State<ProductByCard> createState() => _ProductByCardState();

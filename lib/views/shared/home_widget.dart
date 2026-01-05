@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/product_page_controller.dart';
 import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
 import 'package:shop_app/views/shared/new_shoes.dart';
 import 'package:shop_app/views/shared/product_card.dart';
 import 'package:shop_app/views/ui/product_by_card.dart';
+import 'package:shop_app/views/ui/product_page.dart';
 
 class HomeWidget extends StatelessWidget {
-  const HomeWidget({super.key, required Future<List<Sneakers>> sneaker})
-    : _menSneaker = sneaker;
+  const HomeWidget({
+    super.key,
+    required Future<List<Sneakers>> sneaker,
+    required this.tabIndex,
+  }) : _sneaker = sneaker;
 
-  final Future<List<Sneakers>> _menSneaker;
+  final Future<List<Sneakers>> _sneaker;
+  final int tabIndex;
 
   @override
   Widget build(BuildContext context) {
+    var productNotifierProvider = Provider.of<ProductNotifierProvider>(context);
     return Column(
       children: [
         SizedBox(height: 3),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.40,
           child: FutureBuilder<List<Sneakers>>(
-            future: _menSneaker,
+            future: _sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -28,19 +36,34 @@ class HomeWidget extends StatelessWidget {
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                 return Center(child: Text('No Data Found'));
               } else {
-                final menSneaker = snapshot.data;
+                final sneakers = snapshot.data;
                 return ListView.builder(
-                  itemCount: menSneaker!.length,
+                  itemCount: sneakers!.length,
                   scrollDirection: Axis.horizontal,
 
                   itemBuilder: (context, index) {
-                    final sneaker = menSneaker[index];
-                    return ProductCard(
-                      name: sneaker.name,
-                      category: sneaker.category,
-                      image: sneaker.imageUrl[0],
-                      price: sneaker.price,
-                      id: sneaker.id,
+                    final shoe = sneakers[index];
+                    return GestureDetector(
+                      onTap: () {
+                        productNotifierProvider.shoeSizes = shoe.sizes;
+                        //print(productNotifierProvider.shoeSizes);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductPage(
+                              id: shoe.id,
+                              category: shoe.category,
+                            ),
+                          ),
+                        );
+                      },
+                      child: ProductCard(
+                        name: shoe.name,
+                        category: shoe.category,
+                        image: shoe.imageUrl[0],
+                        price: shoe.price,
+                        id: shoe.id,
+                      ),
                     );
                   },
                 );
@@ -56,7 +79,9 @@ class HomeWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProductByCard()),
+                    MaterialPageRoute(
+                      builder: (context) => ProductByCard(tabIndex: tabIndex),
+                    ),
                   );
                 },
                 child: Row(
@@ -88,7 +113,7 @@ class HomeWidget extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.13,
           child: FutureBuilder<List<Sneakers>>(
-            future: _menSneaker,
+            future: _sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
