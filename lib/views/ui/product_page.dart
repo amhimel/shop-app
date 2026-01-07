@@ -37,7 +37,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   // hive for local DB create cart
-  Future<void> createCart(Map<String, dynamic> newCart) async {
+  Future<void> _createCart(Map<String, dynamic> newCart) async {
     await _cartBox.add(newCart);
   }
 
@@ -422,7 +422,40 @@ class _ProductPageState extends State<ProductPage> {
                                             child: Padding(
                                               padding: EdgeInsets.only(top: 12),
                                               child: CheckOutButtonWidget(
-                                                onTap: () {},
+                                                onTap: () async {
+                                                  if (productNotifierProvider
+                                                      .sizes
+                                                      .isEmpty) {
+                                                    ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          "Please select at least one size",
+                                                        ),
+                                                      ),
+                                                    );
+                                                    return;
+                                                  }
+                                                  _createCart({
+                                                    "id": sneakers.id,
+                                                    "name": sneakers.name,
+                                                    "category":
+                                                        sneakers.category,
+                                                    "sizes": List<String>.from(
+                                                      productNotifierProvider
+                                                          .sizes,
+                                                    ),
+
+                                                    "imageUrl":
+                                                        sneakers.imageUrl[0],
+                                                    "price": sneakers.price,
+                                                    "qty": 1,
+                                                  });
+                                                  productNotifierProvider.sizes
+                                                      .clear();
+                                                  Navigator.pop(context);
+                                                },
                                                 label: 'Add to cart',
                                               ),
                                             ),
