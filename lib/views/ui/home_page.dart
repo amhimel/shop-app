@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/sneakers_model.dart';
-import 'package:shop_app/services/helper.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/favorites_provider.dart';
+import 'package:shop_app/controllers/product_page_controller.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
 import 'package:shop_app/views/shared/home_widget.dart';
 
@@ -17,33 +18,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     vsync: this,
   );
 
-  late Future<List<Sneakers>> _menSneaker;
-  late Future<List<Sneakers>> _womenSneaker;
-  late Future<List<Sneakers>> _kidsSneaker;
-
-  void getMaleSneaker() {
-    _menSneaker = Helper().getMenSneakers();
-  }
-
-  void getFemaleSneaker() {
-    _womenSneaker = Helper().getWomenSneakers();
-  }
-
-  void getKidsSneaker() {
-    _kidsSneaker = Helper().getKidSneakers();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getMaleSneaker();
-    getFemaleSneaker();
-    getKidsSneaker();
-  }
-
   @override
   Widget build(BuildContext context) {
+    var productNotifier = Provider.of<ProductNotifierProvider>(context);
+    productNotifier.getMaleSneaker();
+    productNotifier.getFemaleSneaker();
+    productNotifier.getKidsSneaker();
+
+    var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
+      context,
+      listen: true,
+    );
+    favoritesNotifier.getFavorite();
+
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),
       body: SizedBox(
@@ -116,9 +103,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    HomeWidget(sneaker: _menSneaker,tabIndex: 0,),
-                    HomeWidget(sneaker: _womenSneaker, tabIndex: 1,),
-                    HomeWidget(sneaker: _kidsSneaker, tabIndex: 2,),
+                    HomeWidget(
+                      sneaker: productNotifier.menSneaker,
+                      tabIndex: 0,
+                    ),
+                    HomeWidget(
+                      sneaker: productNotifier.womenSneaker,
+                      tabIndex: 1,
+                    ),
+                    HomeWidget(
+                      sneaker: productNotifier.kidsSneaker,
+                      tabIndex: 2,
+                    ),
                   ],
                 ),
               ),

@@ -4,11 +4,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/favorites_provider.dart';
 import 'package:shop_app/controllers/product_page_controller.dart';
 import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/services/helper.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
 import 'package:shop_app/views/shared/check_out_btn.dart';
+import 'package:shop_app/views/ui/favorites.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id, required this.category});
@@ -22,7 +24,9 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
+
   final _cartBox = Hive.box("cart_box");
+  final _favBox = Hive.box('fav_box');
   late Future<Sneakers> _sneaker;
 
   //get data
@@ -41,6 +45,8 @@ class _ProductPageState extends State<ProductPage> {
     await _cartBox.add(newCart);
   }
 
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -50,6 +56,11 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
+      context,
+      listen: true,
+    );
+    favoritesNotifier.getFavorite();
     return Scaffold(
       body: FutureBuilder<Sneakers>(
         future: _sneaker,
@@ -133,9 +144,57 @@ class _ProductPageState extends State<ProductPage> {
                                             MediaQuery.of(context).size.height *
                                             0.1,
                                         right: 20,
-                                        child: Icon(
-                                          Icons.favorite_outline_rounded,
-                                          color: Colors.black,
+                                        child: Consumer<FavoritesProviderNotifier>(
+                                          builder:
+                                              (
+                                                context,
+                                                favoritesProviderNotifier,
+                                                child,
+                                              ) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    if (favoritesProviderNotifier
+                                                        .ids
+                                                        .contains(widget.id)) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              FavoritesPage(),
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      favoritesNotifier.createFav({
+                                                        "id": sneakers.id,
+                                                        "name": sneakers.name,
+                                                        "category":
+                                                            sneakers.category,
+                                                        "price": sneakers.price,
+                                                        "imageUrl": sneakers
+                                                            .imageUrl[0],
+                                                      });
+
+                                                      setState(() {});
+                                                    }
+                                                  },
+                                                  child:
+                                                      favoritesProviderNotifier
+                                                          .ids
+                                                          .contains(sneakers.id)
+                                                      ? Icon(
+                                                          Icons
+                                                              .favorite_outline_rounded,
+                                                          color: Colors.red,
+                                                          size: 24,
+                                                        )
+                                                      : Icon(
+                                                          Icons
+                                                              .favorite_outline_rounded,
+                                                          color: Colors.black,
+                                                          size: 24,
+                                                        ),
+                                                );
+                                              },
                                         ),
                                       ),
                                       Positioned(

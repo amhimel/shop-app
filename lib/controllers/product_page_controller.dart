@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/sneakers_model.dart';
+import 'package:shop_app/services/helper.dart';
 
 class ProductNotifierProvider extends ChangeNotifier {
   int _activePage = 0;
@@ -19,6 +21,7 @@ class ProductNotifierProvider extends ChangeNotifier {
     _shoeSizes = newShoes;
     notifyListeners();
   }
+
   set sizes(List<String> newSize) {
     _sizes = newSize;
     notifyListeners();
@@ -34,5 +37,19 @@ class ProductNotifierProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  late Future<List<Sneakers>> menSneaker;
+  late Future<List<Sneakers>> womenSneaker;
+  late Future<List<Sneakers>> kidsSneaker;
 
+  void getMaleSneaker() {
+    menSneaker = Helper().getMenSneakers();
+  }
+
+  void getFemaleSneaker() {
+    womenSneaker = Helper().getWomenSneakers();
+  }
+
+  void getKidsSneaker() {
+    kidsSneaker = Helper().getKidSneakers();
+  }
 }

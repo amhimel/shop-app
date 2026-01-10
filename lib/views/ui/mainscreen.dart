@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/controllers/main_screen_notifier_provider.dart';
 import 'package:shop_app/views/shared/bottom_nav.dart';
 import 'package:shop_app/views/ui/cart.dart';
+import 'package:shop_app/views/ui/favorites.dart';
 import 'package:shop_app/views/ui/home_page.dart';
 import 'package:shop_app/views/ui/profile_page.dart';
 import 'package:shop_app/views/ui/search_page.dart';
@@ -13,7 +14,7 @@ class Mainscreen extends StatelessWidget {
   final List<Widget> pageList = [
     const HomePage(),
     const SearchPage(),
-    const HomePage(),
+    const FavoritesPage(),
     CartPage(),
     const ProfilePage(),
   ];

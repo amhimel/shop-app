@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/favorites_provider.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
+import 'package:shop_app/views/ui/favorites.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
@@ -22,8 +25,15 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  final _favBox = Hive.box('fav_box');
+
   @override
   Widget build(BuildContext context) {
+    var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
+      context,
+      listen: true,
+    );
+    favoritesNotifier.getFavorite();
     bool selected = true;
     return Padding(
       padding: EdgeInsets.fromLTRB(8, 0, 20, 0),
@@ -60,12 +70,37 @@ class _ProductCardState extends State<ProductCard> {
                     top: 10,
                     right: 10,
                     child: GestureDetector(
-                      onTap: null,
-                      child: Icon(
-                        Ionicons.heart_outline,
-                        color: Colors.grey,
-                        size: 24,
-                      ),
+                      onTap: () async {
+                        if (favoritesNotifier.ids.contains(widget.id)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FavoritesPage(),
+                            ),
+                          );
+                        } else {
+                          favoritesNotifier.createFav({
+                            "id": widget.id,
+                            "name": widget.name,
+                            "category": widget.category,
+                            "price": widget.price,
+                            "imageUrl": widget.image,
+                          });
+
+                          setState(() {});
+                        }
+                      },
+                      child: favoritesNotifier.ids.contains(widget.id)
+                          ? Icon(
+                              Icons.favorite_outline_rounded,
+                              color: Colors.red,
+                              size: 24,
+                            )
+                          : Icon(
+                              Icons.favorite_outline_rounded,
+                              color: Colors.black,
+                              size: 24,
+                            ),
                     ),
                   ),
                 ],

@@ -1,34 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/cart_provider.dart';
 import 'package:shop_app/views/shared/appstyle.dart';
+import 'package:shop_app/views/shared/check_out_btn.dart';
+import 'package:shop_app/views/ui/mainscreen.dart';
 
 class CartPage extends StatelessWidget {
-  CartPage({super.key});
-  final _cartBox = Hive.box('cart_box');
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> cart = [];
-    final cartData = _cartBox.keys.map((key) {
-      final item = _cartBox.get(key);
-      print("Hive item: $item");
-      print("Hive item sizes: ${item['sizes']}");
-      return {
-        "key": key,
-        "id": item['id'],
-        "name": item['name'],
-        "category": item['category'],
-        "sizes": item['sizes'],
-        "imageUrl": item['imageUrl'],
-        "price": item['price'],
-        "qty": item['qty'],
-      };
-    }).toList();
-
-    cart = cartData.reversed.toList();
-
+    var cartNotifier = Provider.of<CartProviderNotifier>(context, listen: true);
+    cartNotifier.getCart();
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),
       body: Padding(
@@ -53,10 +38,10 @@ class CartPage extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.65,
                   child: ListView.builder(
-                    itemCount: cart.length,
+                    itemCount: cartNotifier.cart.length,
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, index) {
-                      final data = cart[index];
+                      final data = cartNotifier.cart[index];
                       return Padding(
                         padding: EdgeInsets.all(8),
                         child: ClipRRect(
@@ -69,7 +54,13 @@ class CartPage extends StatelessWidget {
                                 // A SlidableAction can have an icon and/or a label.
                                 SlidableAction(
                                   onPressed: (_) {
-                                    _cartBox.delete(data['key']);
+                                    cartNotifier.deleteCart(data['key']);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Mainscreen(),
+                                      ),
+                                    );
                                   },
                                   backgroundColor: Color(0xFF000000),
                                   foregroundColor: Colors.white,
@@ -98,14 +89,72 @@ class CartPage extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(12),
-                                        child: CachedNetworkImage(
-                                          imageUrl: data['imageUrl'],
-                                          width: 70,
-                                          height: 70,
-                                          fit: BoxFit.fill,
-                                        ),
+                                      Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(10),
+                                            child: CachedNetworkImage(
+                                              imageUrl: data['imageUrl'],
+                                              width: 70,
+                                              height: 70,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: -2,
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                cartNotifier.deleteCart(
+                                                  data['key'],
+                                                );
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Mainscreen(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black,
+                                                  borderRadius:
+                                                      BorderRadius.only(topRight: Radius.circular(12)),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black
+                                                          .withOpacity(0.4),
+                                                      offset: const Offset(
+                                                        0,
+                                                        1,
+                                                      ),
+                                                      blurRadius: 8,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(0.05),
+                                                      offset: const Offset(
+                                                        1,
+                                                        2,
+                                                      ),
+                                                      blurRadius: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    Icons.delete_outline,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -175,6 +224,53 @@ class CartPage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(16),
+                                            ),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Icon(
+                                                  Icons.add_box,
+                                                  size: 20,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Text(
+                                                data['qty'].toString(),
+                                                style: appstyle(
+                                                  12,
+                                                  FontWeight.w600,
+                                                  Colors.black,
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Icon(
+                                                  Icons
+                                                      .indeterminate_check_box_rounded,
+                                                  size: 20,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -185,6 +281,13 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CheckOutButtonWidget(
+                label: "Proceed to Checkout",
+                onTap: () {},
+              ),
             ),
           ],
         ),
