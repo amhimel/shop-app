@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/main_screen_notifier_provider.dart';
-import 'package:shop_app/views/shared/bottom_nav_widget.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -48,19 +45,19 @@ class BottomNavBar extends StatelessWidget {
                         ? Ionicons.heart
                         : Ionicons.heart_outline,
                   ),
+                  // BottmNavWidget(
+                  //   onTap: () {
+                  //     mainScreenProvider.setPageIndex = 3;
+                  //   },
+                  //   icon: mainScreenProvider.pageIndex == 3
+                  //       ? Ionicons.cart
+                  //       : Ionicons.cart_outline,
+                  // ),
                   BottmNavWidget(
                     onTap: () {
                       mainScreenProvider.setPageIndex = 3;
                     },
                     icon: mainScreenProvider.pageIndex == 3
-                        ? Ionicons.cart
-                        : Ionicons.cart_outline,
-                  ),
-                  BottmNavWidget(
-                    onTap: () {
-                      mainScreenProvider.setPageIndex = 4;
-                    },
-                    icon: mainScreenProvider.pageIndex == 4
                         ? Ionicons.person
                         : Ionicons.person_outline,
                   ),

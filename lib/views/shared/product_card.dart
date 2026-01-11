@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/favorites_provider.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
-import 'package:shop_app/views/ui/favorites.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
@@ -25,8 +21,6 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  final _favBox = Hive.box('fav_box');
-
   @override
   Widget build(BuildContext context) {
     var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
@@ -36,19 +30,19 @@ class _ProductCardState extends State<ProductCard> {
     favoritesNotifier.getFavorite();
     bool selected = true;
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 0, 20, 0),
+      padding: EdgeInsets.fromLTRB(8.w, 0, 20.w, 0),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(16.r)),
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width * 0.6,
+          height: 1.sh,
+          width: 0.6.sw,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.white,
                 spreadRadius: 1,
                 blurRadius: 0.6,
-                offset: Offset(1, 1), // changes position of shadow
+                offset: Offset(1.w, 1.h),
               ),
             ],
           ),
@@ -58,7 +52,7 @@ class _ProductCardState extends State<ProductCard> {
               Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
+                    height: 0.23.sh,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(widget.image),
@@ -67,8 +61,8 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ),
                   Positioned(
-                    top: 10,
-                    right: 10,
+                    top: 10.h,
+                    right: 10.w,
                     child: GestureDetector(
                       onTap: () async {
                         if (favoritesNotifier.ids.contains(widget.id)) {
@@ -94,38 +88,38 @@ class _ProductCardState extends State<ProductCard> {
                           ? Icon(
                               Icons.favorite_outline_rounded,
                               color: Colors.red,
-                              size: 24,
+                              size: 24.sp,
                             )
                           : Icon(
                               Icons.favorite_outline_rounded,
                               color: Colors.black,
-                              size: 24,
+                              size: 24.sp,
                             ),
                     ),
                   ),
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 10.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FittedBox(
-                      child: Text(
-                        widget.name,
+                      child: ReusableText(
+                        text: widget.name,
                         style: appstyleWithHT(
-                          30,
+                          30.sp,
                           FontWeight.bold,
                           Colors.black,
                           1.1,
                         ),
                       ),
                     ),
-                    SizedBox(height: 3),
-                    Text(
-                      widget.category,
+                    SizedBox(height: 3.h),
+                    ReusableText(
+                      text: widget.category,
                       style: appstyleWithHT(
-                        20,
+                        20.sp,
                         FontWeight.bold,
                         Colors.grey,
                         1.5,
@@ -134,28 +128,28 @@ class _ProductCardState extends State<ProductCard> {
                   ],
                 ),
               ),
-              SizedBox(height: 3),
+              SizedBox(height: 3.h),
               Padding(
-                padding: EdgeInsets.only(left: 8, right: 8),
+                padding: EdgeInsets.only(left: 8.w, right: 8.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '\$${widget.price}',
-                      style: appstyle(25, FontWeight.bold, Colors.black),
+                    ReusableText(
+                      text: '\$${widget.price}',
+                      style: appstyle(25.sp, FontWeight.bold, Colors.black),
                     ),
-                    const SizedBox(width: 5),
+                    SizedBox(width: 5.w),
                     Row(
                       children: [
-                        Text(
-                          'Colors',
-                          style: appstyle(18, FontWeight.w500, Colors.grey),
+                        ReusableText(
+                          text: 'Colors',
+                          style: appstyle(18.sp, FontWeight.w500, Colors.grey),
                         ),
-                        const SizedBox(width: 5),
+                        SizedBox(width: 5.w),
                         ClipOval(
                           child: Container(
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.w,
                             decoration: BoxDecoration(shape: BoxShape.circle),
                             child: ChoiceChip(
                               label: Text(''),

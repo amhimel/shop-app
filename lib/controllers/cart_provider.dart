@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class CartProviderNotifier extends ChangeNotifier {
   int _counter = 0;
@@ -47,5 +46,10 @@ class CartProviderNotifier extends ChangeNotifier {
 
   Future<void> deleteCart(int key) async {
     await _cartBox.delete(key);
+  }
+
+  // hive for local DB create cart
+  Future<void> createCart(Map<String, dynamic> newCart) async {
+    await _cartBox.add(newCart);
   }
 }

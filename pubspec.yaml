@@ -44,6 +44,8 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_slidable: ^4.0.3
   flutter_vector_icons: ^2.0.0
+  flutter_screenutil: ^5.9.3
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:

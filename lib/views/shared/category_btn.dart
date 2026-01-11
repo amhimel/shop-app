@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class CategoryBtn extends StatelessWidget {
   const CategoryBtn({
@@ -27,7 +27,11 @@ class CategoryBtn extends StatelessWidget {
           ),
           borderRadius: BorderRadius.all(Radius.circular(9)),
         ),
-        child: Center(child: FittedBox(child: Text(label, style: appstyle(20, FontWeight.w600, btnColor)))),
+        child: Center(
+          child: FittedBox(
+            child: Text(label, style: appstyle(20, FontWeight.w600, btnColor)),
+          ),
+        ),
       ),
     );
   }

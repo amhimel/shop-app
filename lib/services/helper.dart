@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart' as the_bundle;
-import 'package:shop_app/models/sneakers_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:shop_app/views/shared/export_files.dart';
 
 // this class can be used to get data from api but currently it's not have any api.now we get data from local json file
 class Helper {
@@ -29,7 +30,8 @@ class Helper {
     final womenList = sneakersFromJson(data);
     return womenList;
   }
-// get kid sneaker by id
+
+  // get kid sneaker by id
   Future<Sneakers> getKidSneakersByIds(String id) async {
     final String data = await the_bundle.rootBundle.loadString(
       'assets/json/kids_shoes.json',
@@ -48,14 +50,14 @@ class Helper {
     final sneaker = menList.firstWhere((sneakers) => sneakers.id == id);
     return sneaker;
   }
+
   // get women sneaker by id
   Future<Sneakers> getWomenSneakersByIds(String id) async {
     final String data = await the_bundle.rootBundle.loadString(
       'assets/json/women_shoes.json',
     );
     final womenList = sneakersFromJson(data);
-    final sneaker = womenList.firstWhere((sneakers) => sneakers.id == id);  
+    final sneaker = womenList.firstWhere((sneakers) => sneakers.id == id);
     return sneaker;
   }
-
 }

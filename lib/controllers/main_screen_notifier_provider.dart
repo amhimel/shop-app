@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class MainScreenNotifierProvider extends ChangeNotifier {
   int _pageIndex = 0;

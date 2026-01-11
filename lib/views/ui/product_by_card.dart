@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/models/sneakers_model.dart';
-import 'package:shop_app/services/helper.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
-import 'package:shop_app/views/shared/category_btn.dart';
-import 'package:shop_app/views/shared/custom_spacer.dart';
-import 'package:shop_app/views/shared/latest_shoes_widget.dart';
+
+
+
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class ProductByCard extends StatefulWidget {
   const ProductByCard({super.key, required this.tabIndex});
@@ -17,34 +15,29 @@ class ProductByCard extends StatefulWidget {
 
 class _ProductByCardState extends State<ProductByCard>
     with TickerProviderStateMixin {
-  late final TabController _tabController = TabController(
-    length: 3,
-    vsync: this,
-  );
-
-  late Future<List<Sneakers>> _menSneaker;
-  late Future<List<Sneakers>> _womenSneaker;
-  late Future<List<Sneakers>> _kidsSneaker;
-
-  void getMaleSneaker() {
-    _menSneaker = Helper().getMenSneakers();
-  }
-
-  void getFemaleSneaker() {
-    _womenSneaker = Helper().getWomenSneakers();
-  }
-
-  void getKidsSneaker() {
-    _kidsSneaker = Helper().getKidSneakers();
-  }
+  late TabController _tabController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getMaleSneaker();
-    getFemaleSneaker();
-    getKidsSneaker();
+    _tabController = TabController(length: 3, vsync: this);
+
+    // Initialize the futures once
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final productNotifier = Provider.of<ProductNotifierProvider>(
+        context,
+        listen: false,
+      );
+      productNotifier.getMaleSneaker();
+      productNotifier.getFemaleSneaker();
+      productNotifier.getKidsSneaker();
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   List<String> brand = [
@@ -56,15 +49,20 @@ class _ProductByCardState extends State<ProductByCard>
 
   @override
   Widget build(BuildContext context) {
+    var productNotifier = Provider.of<ProductNotifierProvider>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),
       body: SizedBox(
-        height: MediaQuery.of(context).size.height,
+        height: 1.sh,
         child: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.fromLTRB(16, 45, 0, 0),
-              height: MediaQuery.of(context).size.height * 0.45,
+              padding: EdgeInsets.fromLTRB(16.w, 45.h, 0, 0),
+              height: 0.45.sh,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/top_image.png'),
@@ -75,7 +73,7 @@ class _ProductByCardState extends State<ProductByCard>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(6, 12, 16, 18),
+                    padding: EdgeInsets.fromLTRB(6.w, 12.h, 16.w, 18.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -102,7 +100,7 @@ class _ProductByCardState extends State<ProductByCard>
                     indicatorSize: TabBarIndicatorSize.label,
                     indicatorColor: Colors.transparent,
                     labelColor: Colors.white,
-                    labelStyle: appstyle(24, FontWeight.bold, Colors.white),
+                    labelStyle: appstyle(24.sp, FontWeight.bold, Colors.white),
                     isScrollable: true,
                     unselectedLabelColor: Colors.grey.withOpacity(0.3),
                     dividerColor: Colors.transparent,
@@ -118,19 +116,15 @@ class _ProductByCardState extends State<ProductByCard>
 
             // Tab bar view
             Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.185,
-                left: 16,
-                right: 12,
-              ),
+              padding: EdgeInsets.only(top: 0.185.sh, left: 16.w, right: 12.w),
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(16.r)),
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    LatestShoes(sneaker: _menSneaker),
-                    LatestShoes(sneaker: _womenSneaker),
-                    LatestShoes(sneaker: _kidsSneaker),
+                    LatestShoes(sneaker: productNotifier.menSneaker),
+                    LatestShoes(sneaker: productNotifier.womenSneaker),
+                    LatestShoes(sneaker: productNotifier.kidsSneaker),
                   ],
                 ),
               ),
@@ -149,41 +143,41 @@ class _ProductByCardState extends State<ProductByCard>
       backgroundColor: Colors.transparent,
       barrierColor: Colors.white54,
       builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.82,
-        width: MediaQuery.of(context).size.width,
+        height: 0.82.sh,
+        width: 1.sw,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+            topLeft: Radius.circular(25.r),
+            topRight: Radius.circular(25.r),
           ),
         ),
         child: Column(
           children: [
-            SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Container(
-              height: 5,
-              width: 40,
+              height: 5.h,
+              width: 40.w,
               decoration: BoxDecoration(
                 color: Colors.black38,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(10.r)),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.70,
+              height: 0.70.sh,
               child: Column(
                 children: [
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10.h),
                   Text(
                     'Filter',
-                    style: appstyle(40, FontWeight.bold, Colors.black),
+                    style: appstyle(40.sp, FontWeight.bold, Colors.black),
                   ),
                   CustomSpacer(),
                   Text(
                     'Gender',
-                    style: appstyle(20, FontWeight.bold, Colors.black),
+                    style: appstyle(20.sp, FontWeight.bold, Colors.black),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Row(
                     children: const [
                       CategoryBtn(btnColor: Colors.black, label: 'Men'),
@@ -194,9 +188,9 @@ class _ProductByCardState extends State<ProductByCard>
                   CustomSpacer(),
                   Text(
                     'Category',
-                    style: appstyle(20, FontWeight.w600, Colors.black),
+                    style: appstyle(20.sp, FontWeight.w600, Colors.black),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Row(
                     children: [
                       CategoryBtn(btnColor: Colors.black, label: 'Shoes'),
@@ -207,9 +201,9 @@ class _ProductByCardState extends State<ProductByCard>
                   CustomSpacer(),
                   Text(
                     'Price',
-                    style: appstyle(20, FontWeight.w600, Colors.black),
+                    style: appstyle(20.sp, FontWeight.w600, Colors.black),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 10.h),
                   Slider(
                     value: value,
                     activeColor: Colors.black,
@@ -220,32 +214,32 @@ class _ProductByCardState extends State<ProductByCard>
                     label: value.toString(),
                     onChanged: (double value) {},
                   ),
-                  
+
                   Text(
                     'Brand',
-                    style: appstyle(20, FontWeight.w600, Colors.black),
+                    style: appstyle(20.sp, FontWeight.w600, Colors.black),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Container(
-                    padding: EdgeInsets.all(8),
-                    height: 80,
+                    padding: EdgeInsets.all(8.w),
+                    height: 80.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: brand.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8.w),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.grey.shade200,
                               borderRadius: BorderRadius.all(
-                                Radius.circular(12),
+                                Radius.circular(12.r),
                               ),
                             ),
                             child: Image.asset(
                               brand[index],
-                              height: 60,
-                              width: 70,
+                              height: 60.h,
+                              width: 70.w,
                               color: Colors.black,
                             ),
                           ),

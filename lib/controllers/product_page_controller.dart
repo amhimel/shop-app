@@ -40,6 +40,7 @@ class ProductNotifierProvider extends ChangeNotifier {
   late Future<List<Sneakers>> menSneaker;
   late Future<List<Sneakers>> womenSneaker;
   late Future<List<Sneakers>> kidsSneaker;
+  late Future<Sneakers> sneaker;
 
   void getMaleSneaker() {
     menSneaker = Helper().getMenSneakers();
@@ -51,5 +52,16 @@ class ProductNotifierProvider extends ChangeNotifier {
 
   void getKidsSneaker() {
     kidsSneaker = Helper().getKidSneakers();
+  }
+
+  //get data
+  void getShoes(String category, String id) {
+    if (category == "Men's Shoes") {
+      sneaker = Helper().getMenSneakersByIds(id);
+    } else if (category == "Women's Shoes") {
+      sneaker = Helper().getWomenSneakersByIds(id);
+    } else {
+      sneaker = Helper().getKidSneakersByIds(id);
+    }
   }
 }

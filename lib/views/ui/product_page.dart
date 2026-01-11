@@ -1,16 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/favorites_provider.dart';
-import 'package:shop_app/controllers/product_page_controller.dart';
-import 'package:shop_app/models/sneakers_model.dart';
-import 'package:shop_app/services/helper.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
-import 'package:shop_app/views/shared/check_out_btn.dart';
-import 'package:shop_app/views/ui/favorites.dart';
+
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id, required this.category});
@@ -25,45 +15,19 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
 
-  final _cartBox = Hive.box("cart_box");
-  final _favBox = Hive.box('fav_box');
-  late Future<Sneakers> _sneaker;
-
-  //get data
-  void getShoes() {
-    if (widget.category == "Men's Shoes") {
-      _sneaker = Helper().getMenSneakersByIds(widget.id);
-    } else if (widget.category == "Women's Shoes") {
-      _sneaker = Helper().getWomenSneakersByIds(widget.id);
-    } else {
-      _sneaker = Helper().getKidSneakersByIds(widget.id);
-    }
-  }
-
-  // hive for local DB create cart
-  Future<void> _createCart(Map<String, dynamic> newCart) async {
-    await _cartBox.add(newCart);
-  }
-
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getShoes();
-  }
-
   @override
   Widget build(BuildContext context) {
     var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
       context,
       listen: true,
     );
+    var cartNotifier = Provider.of<CartProviderNotifier>(context, listen: true);
+    var productNotifier = Provider.of<ProductNotifierProvider>(context);
     favoritesNotifier.getFavorite();
+    productNotifier.getShoes(widget.category, widget.id);
     return Scaffold(
       body: FutureBuilder<Sneakers>(
-        future: _sneaker,
+        future: productNotifier.sneaker,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -76,13 +40,12 @@ class _ProductPageState extends State<ProductPage> {
             return Consumer<ProductNotifierProvider>(
               builder: (context, productNotifierProvider, child) {
                 return CustomScrollView(
-                  //scrollDirection: Axis.vertical,
                   slivers: [
                     SliverAppBar(
                       automaticallyImplyLeading: false,
                       leadingWidth: 0,
                       title: Padding(
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: EdgeInsets.only(bottom: 10.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -107,14 +70,14 @@ class _ProductPageState extends State<ProductPage> {
                       snap: false,
                       floating: true,
                       backgroundColor: Colors.transparent,
-                      expandedHeight: MediaQuery.of(context).size.height,
+                      expandedHeight: 1.sh,
                       flexibleSpace: FlexibleSpaceBar(
                         background: Stack(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              width: MediaQuery.of(context).size.width,
-                              // iamge slider for detail page
+                              height: 0.5.sh,
+                              width: 1.sw,
+                              // image slider for detail page
                               child: PageView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: sneakers!.imageUrl.length,
@@ -127,12 +90,8 @@ class _ProductPageState extends State<ProductPage> {
                                   return Stack(
                                     children: [
                                       Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                            0.39,
-                                        width: MediaQuery.of(
-                                          context,
-                                        ).size.width,
+                                        height: 0.39.sh,
+                                        width: 1.sw,
                                         color: Colors.grey.shade300,
                                         child: CachedNetworkImage(
                                           imageUrl: sneakers.imageUrl[index],
@@ -140,10 +99,8 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
                                       ),
                                       Positioned(
-                                        top:
-                                            MediaQuery.of(context).size.height *
-                                            0.1,
-                                        right: 20,
+                                        top: 0.1.sh,
+                                        right: 20.w,
                                         child: Consumer<FavoritesProviderNotifier>(
                                           builder:
                                               (
@@ -164,15 +121,18 @@ class _ProductPageState extends State<ProductPage> {
                                                         ),
                                                       );
                                                     } else {
-                                                      favoritesNotifier.createFav({
-                                                        "id": sneakers.id,
-                                                        "name": sneakers.name,
-                                                        "category":
-                                                            sneakers.category,
-                                                        "price": sneakers.price,
-                                                        "imageUrl": sneakers
-                                                            .imageUrl[0],
-                                                      });
+                                                      favoritesNotifier
+                                                          .createFav({
+                                                            "id": sneakers.id,
+                                                            "name":
+                                                                sneakers.name,
+                                                            "category": sneakers
+                                                                .category,
+                                                            "price":
+                                                                sneakers.price,
+                                                            "imageUrl": sneakers
+                                                                .imageUrl[0],
+                                                          });
 
                                                       setState(() {});
                                                     }
@@ -185,13 +145,13 @@ class _ProductPageState extends State<ProductPage> {
                                                           Icons
                                                               .favorite_outline_rounded,
                                                           color: Colors.red,
-                                                          size: 24,
+                                                          size: 24.sp,
                                                         )
                                                       : Icon(
                                                           Icons
                                                               .favorite_outline_rounded,
                                                           color: Colors.black,
-                                                          size: 24,
+                                                          size: 24.sp,
                                                         ),
                                                 );
                                               },
@@ -201,9 +161,7 @@ class _ProductPageState extends State<ProductPage> {
                                         bottom: 0,
                                         right: 0,
                                         left: 0,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                            0.3,
+                                        height: 0.3.sh,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -211,10 +169,10 @@ class _ProductPageState extends State<ProductPage> {
                                             sneakers.imageUrl.length,
                                             (index) => Padding(
                                               padding: EdgeInsets.symmetric(
-                                                horizontal: 4,
+                                                horizontal: 4.w,
                                               ),
                                               child: CircleAvatar(
-                                                radius: 5,
+                                                radius: 5.r,
                                                 backgroundColor:
                                                     productNotifierProvider
                                                             .activePage !=
@@ -232,131 +190,129 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             Positioned(
-                              bottom: 30,
+                              bottom: 30.h,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
+                                  topLeft: Radius.circular(30.r),
+                                  topRight: Radius.circular(30.r),
                                 ),
                                 child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height *
-                                      0.645,
-                                  width: MediaQuery.of(context).size.width,
+                                  height: 0.645.sh,
+                                  width: 1.sw,
                                   color: Colors.white,
                                   child: Padding(
-                                    padding: EdgeInsets.all(12),
+                                    padding: EdgeInsets.all(12.w),
                                     child: SingleChildScrollView(
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            sneakers.name,
+                                          ReusableText(
+                                            text: sneakers.name,
                                             style: appstyle(
-                                              40,
+                                              40.sp,
                                               FontWeight.bold,
                                               Colors.black,
                                             ),
                                           ),
                                           Row(
                                             children: [
-                                              Text(
-                                                sneakers.category,
+                                              ReusableText(
+                                                text: sneakers.category,
                                                 style: appstyle(
-                                                  20,
+                                                  20.sp,
                                                   FontWeight.w500,
                                                   Colors.grey,
                                                 ),
                                               ),
-                                              SizedBox(width: 20),
+                                              SizedBox(width: 20.w),
                                               RatingBar.builder(
                                                 initialRating: 4,
                                                 minRating: 1,
                                                 direction: Axis.horizontal,
                                                 allowHalfRating: true,
                                                 itemCount: 5,
-                                                itemSize: 22,
+                                                itemSize: 22.sp,
                                                 itemPadding:
                                                     EdgeInsets.symmetric(
-                                                      horizontal: 1,
+                                                      horizontal: 1.w,
                                                     ),
                                                 itemBuilder: (context, _) =>
                                                     Icon(
                                                       Icons.star,
-                                                      size: 18,
+                                                      size: 18.sp,
                                                       color: Colors.black,
                                                     ),
                                                 onRatingUpdate: (rating) {},
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 20),
+                                          SizedBox(height: 20.h),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                '\$${sneakers.price}',
+                                              ReusableText(
+                                                text: '\$${sneakers.price}',
                                                 style: appstyle(
-                                                  26,
+                                                  26.sp,
                                                   FontWeight.w600,
                                                   Colors.black,
                                                 ),
                                               ),
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    "Colors",
+                                                  ReusableText(
+                                                    text: "Colors",
                                                     style: appstyle(
-                                                      18,
+                                                      18.sp,
                                                       FontWeight.w500,
                                                       Colors.black,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 5),
+                                                  SizedBox(width: 5.w),
                                                   CircleAvatar(
-                                                    radius: 7,
+                                                    radius: 7.r,
                                                     backgroundColor:
                                                         Colors.black,
                                                   ),
-                                                  SizedBox(width: 5),
+                                                  SizedBox(width: 5.w),
                                                   CircleAvatar(
-                                                    radius: 7,
+                                                    radius: 7.r,
                                                     backgroundColor: Colors.red,
                                                   ),
                                                 ],
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 20),
+                                          SizedBox(height: 20.h),
                                           Column(
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    'Select Sizes',
+                                                  ReusableText(
+                                                    text: 'Select Sizes',
                                                     style: appstyle(
-                                                      20,
+                                                      20.sp,
                                                       FontWeight.w600,
                                                       Colors.black,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 20),
-                                                  Text(
-                                                    'View sizes guide',
+                                                  SizedBox(width: 20.w),
+                                                  ReusableText(
+                                                    text: 'View sizes guide',
                                                     style: appstyle(
-                                                      20,
+                                                      20.sp,
                                                       FontWeight.w600,
                                                       Colors.grey,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(height: 10),
+                                              SizedBox(height: 10.h),
                                               //for sizes list
                                               SizedBox(
-                                                height: 40,
+                                                height: 40.h,
                                                 child: ListView.builder(
                                                   scrollDirection:
                                                       Axis.horizontal,
@@ -371,14 +327,14 @@ class _ProductPageState extends State<ProductPage> {
                                                             .shoeSizes[index];
                                                     return Padding(
                                                       padding:
-                                                          const EdgeInsets.symmetric(
-                                                            horizontal: 8,
+                                                          EdgeInsets.symmetric(
+                                                            horizontal: 8.w,
                                                           ),
                                                       child: ChoiceChip(
-                                                        label: Text(
-                                                          sizes['size'],
+                                                        label: ReusableText(
+                                                          text: sizes['size'],
                                                           style: appstyle(
-                                                            18,
+                                                            18.sp,
                                                             FontWeight.w500,
                                                             sizes['isSelected']
                                                                 ? Colors.white
@@ -391,7 +347,7 @@ class _ProductPageState extends State<ProductPage> {
                                                             Colors.black,
                                                         padding:
                                                             EdgeInsets.symmetric(
-                                                              vertical: 8,
+                                                              vertical: 8.h,
                                                             ),
                                                         onSelected: (newState) {
                                                           //add selected size on list
@@ -425,7 +381,7 @@ class _ProductPageState extends State<ProductPage> {
                                                         shape: RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius.circular(
-                                                                20,
+                                                                20.r,
                                                               ),
                                                           side: BorderSide(
                                                             color: Colors.black,
@@ -443,43 +399,41 @@ class _ProductPageState extends State<ProductPage> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 10),
+                                          SizedBox(height: 10.h),
                                           Divider(
-                                            indent: 10,
-                                            endIndent: 10,
+                                            indent: 10.w,
+                                            endIndent: 10.w,
                                             color: Colors.black,
                                           ),
-                                          SizedBox(height: 10),
+                                          SizedBox(height: 10.h),
                                           SizedBox(
-                                            width:
-                                                MediaQuery.of(
-                                                  context,
-                                                ).size.width *
-                                                .80,
-                                            child: Text(
-                                              sneakers.title,
+                                            width: 0.80.sw,
+                                            child: ReusableText(
+                                              text: sneakers.title,
                                               style: appstyle(
-                                                20,
+                                                20.sp,
                                                 FontWeight.w700,
                                                 Colors.black,
                                               ),
                                             ),
                                           ),
-                                          SizedBox(height: 10),
+                                          SizedBox(height: 10.h),
                                           Text(
                                             sneakers.description,
                                             style: appstyle(
-                                              14,
+                                              14.sp,
                                               FontWeight.normal,
                                               Colors.black,
                                             ),
                                             maxLines: 4,
                                           ),
-                                          SizedBox(height: 10),
+                                          SizedBox(height: 10.h),
                                           Align(
                                             alignment: Alignment.bottomCenter,
                                             child: Padding(
-                                              padding: EdgeInsets.only(top: 12),
+                                              padding: EdgeInsets.only(
+                                                top: 12.h,
+                                              ),
                                               child: CheckOutButtonWidget(
                                                 onTap: () async {
                                                   if (productNotifierProvider
@@ -496,7 +450,7 @@ class _ProductPageState extends State<ProductPage> {
                                                     );
                                                     return;
                                                   }
-                                                  _createCart({
+                                                  cartNotifier.createCart({
                                                     "id": sneakers.id,
                                                     "name": sneakers.name,
                                                     "category":
@@ -505,7 +459,6 @@ class _ProductPageState extends State<ProductPage> {
                                                       productNotifierProvider
                                                           .sizes,
                                                     ),
-
                                                     "imageUrl":
                                                         sneakers.imageUrl[0],
                                                     "price": sneakers.price,

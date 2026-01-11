@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/models/sneakers_model.dart';
-import 'package:shop_app/views/shared/stagger_tile.dart';
-import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class LatestShoes extends StatelessWidget {
   const LatestShoes({super.key, required Future<List<Sneakers>> sneaker})
@@ -25,16 +23,14 @@ class LatestShoes extends StatelessWidget {
           return StaggeredGridView.countBuilder(
             padding: EdgeInsets.zero,
             crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 20,
+            mainAxisSpacing: 12.h,
+            crossAxisSpacing: 20.w,
             itemCount: sneaker!.length,
             scrollDirection: Axis.vertical,
 
             staggeredTileBuilder: (index) => StaggeredTile.extent(
               (index % 2 == 0) ? 1 : 1,
-              (index % 4 == 1 || index % 4 == 3)
-                  ? MediaQuery.of(context).size.height * 0.35
-                  : MediaQuery.of(context).size.height * 0.30,
+              (index % 4 == 1 || index % 4 == 3) ? 0.35.sh : 0.30.sh,
             ),
             itemBuilder: (context, index) {
               final shoes = snapshot.data![index];

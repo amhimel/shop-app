@@ -1,12 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/product_page_controller.dart';
-import 'package:shop_app/models/sneakers_model.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
-import 'package:shop_app/views/shared/new_shoes.dart';
-import 'package:shop_app/views/shared/product_card.dart';
-import 'package:shop_app/views/ui/product_by_card.dart';
-import 'package:shop_app/views/ui/product_page.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
@@ -21,11 +14,12 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var productNotifierProvider = Provider.of<ProductNotifierProvider>(context);
+
     return Column(
       children: [
-        SizedBox(height: 3),
+        SizedBox(height: 3.h),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.40,
+          height: 0.40.sh,
           child: FutureBuilder<List<Sneakers>>(
             future: _sneaker,
             builder: (context, snapshot) {
@@ -40,13 +34,11 @@ class HomeWidget extends StatelessWidget {
                 return ListView.builder(
                   itemCount: sneakers!.length,
                   scrollDirection: Axis.horizontal,
-
                   itemBuilder: (context, index) {
                     final shoe = sneakers[index];
                     return GestureDetector(
                       onTap: () {
                         productNotifierProvider.shoeSizes = shoe.sizes;
-                        //print(productNotifierProvider.shoeSizes);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -74,7 +66,7 @@ class HomeWidget extends StatelessWidget {
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+              padding: EdgeInsets.fromLTRB(12.w, 20.h, 12.w, 20.h),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -87,19 +79,19 @@ class HomeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Latest Shoes',
-                      style: appstyle(22, FontWeight.bold, Colors.black),
+                    ReusableText(
+                      text: 'Latest Shoes',
+                      style: appstyle(22.sp, FontWeight.bold, Colors.black),
                     ),
                     Row(
                       children: [
-                        Text(
-                          'View All',
-                          style: appstyle(22, FontWeight.w500, Colors.black),
+                        ReusableText(
+                          text: 'View All',
+                          style: appstyle(22.sp, FontWeight.w500, Colors.black),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.arrow_forward_ios_rounded,
-                          size: 22,
+                          size: 22.sp,
                           color: Colors.black,
                         ),
                       ],
@@ -111,7 +103,7 @@ class HomeWidget extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.13,
+          height: 0.13.sh,
           child: FutureBuilder<List<Sneakers>>(
             future: _sneaker,
             builder: (context, snapshot) {
@@ -126,11 +118,10 @@ class HomeWidget extends StatelessWidget {
                 return ListView.builder(
                   itemCount: menSneaker!.length,
                   scrollDirection: Axis.horizontal,
-
                   itemBuilder: (context, index) {
                     final sneaker = menSneaker[index];
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.w),
                       child: NewShoes(imageUrl: sneaker.imageUrl[1]),
                     );
                   },

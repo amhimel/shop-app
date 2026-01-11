@@ -1,5 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class NewShoes extends StatelessWidget {
   const NewShoes({super.key, required this.imageUrl});

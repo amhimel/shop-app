@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class BottmNavWidget extends StatelessWidget {
   const BottmNavWidget({super.key, this.onTap, this.icon});

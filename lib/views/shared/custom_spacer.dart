@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class CustomSpacer extends StatelessWidget {
-  const CustomSpacer({super.key,});
-  
+  const CustomSpacer({super.key});
 
   @override
   Widget build(BuildContext context) {

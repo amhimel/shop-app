@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 TextStyle appstyle(double fontSize, FontWeight fontWeight, Color color) {
   return GoogleFonts.poppins(
-    fontSize: fontSize,
+    fontSize: fontSize.sp,
     fontWeight: fontWeight,
     color: color,
   );
@@ -16,7 +15,7 @@ TextStyle appstyleWithHT(
   double height,
 ) {
   return GoogleFonts.poppins(
-    fontSize: fontSize,
+    fontSize: fontSize.sp,
     fontWeight: fontWeight,
     color: color,
     height: height,

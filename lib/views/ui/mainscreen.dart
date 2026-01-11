@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/main_screen_notifier_provider.dart';
-import 'package:shop_app/views/shared/bottom_nav.dart';
-import 'package:shop_app/views/ui/cart.dart';
-import 'package:shop_app/views/ui/favorites.dart';
-import 'package:shop_app/views/ui/home_page.dart';
-import 'package:shop_app/views/ui/profile_page.dart';
-import 'package:shop_app/views/ui/search_page.dart';
+
+
+
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class Mainscreen extends StatelessWidget {
    Mainscreen({super.key});
@@ -15,7 +11,7 @@ class Mainscreen extends StatelessWidget {
     const HomePage(),
     const SearchPage(),
     const FavoritesPage(),
-    CartPage(),
+    //const CartPage(),
     const ProfilePage(),
   ];
 

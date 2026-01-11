@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import '../views/shared/export_packages.dart';
 
 class FavoritesProviderNotifier extends ChangeNotifier {
   final _favBox = Hive.box('fav_box');

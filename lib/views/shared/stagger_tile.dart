@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class StaggerTile extends StatefulWidget {
   const StaggerTile({
@@ -23,10 +22,10 @@ class _StaggerTileState extends State<StaggerTile> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(16.r)),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,28 +33,34 @@ class _StaggerTileState extends State<StaggerTile> {
             CachedNetworkImage(
               imageUrl: widget.imageUrl,
               fit: BoxFit.fill,
-              height: MediaQuery.of(context).size.height * 0.175,
-              width: MediaQuery.of(context).size.width,
+              height: 0.175.sh,
+              width: 1.sw,
             ),
             Container(
-              padding: EdgeInsets.only(top: 12),
-              height: 70,
+              padding: EdgeInsets.only(top: 12.h),
+              height: 70.h,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                    style: appstyleWithHT(20, FontWeight.w700, Colors.black, 1),
+                  ReusableText(
+                    text: widget.name,
+                    style: appstyleWithHT(
+                      20.sp,
+                      FontWeight.w700,
+                      Colors.black,
+                      1,
+                    ),
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    '\$${widget.price}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: appstyleWithHT(20, FontWeight.w500, Colors.black, 1),
+                  SizedBox(height: 5.h),
+                  ReusableText(
+                    text: '\$${widget.price}',
+                    style: appstyleWithHT(
+                      20.sp,
+                      FontWeight.w500,
+                      Colors.black,
+                      1,
+                    ),
                   ),
                 ],
               ),

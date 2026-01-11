@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/controllers/favorites_provider.dart';
-import 'package:shop_app/views/shared/appstyle.dart';
-import 'package:shop_app/views/ui/mainscreen.dart';
+
+
+import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/views/shared/export_packages.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
