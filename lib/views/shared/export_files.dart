@@ -24,5 +24,6 @@ export 'package:shop_app/views/shared/category_btn.dart';
 export 'package:shop_app/views/shared/custom_spacer.dart';
 export 'package:shop_app/views/shared/latest_shoes_widget.dart';
 export 'package:shop_app/app.dart';
+export 'package:shop_app/services/config.dart';
 
 

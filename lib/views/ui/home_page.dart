@@ -14,24 +14,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     vsync: this,
   );
 
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
+      productNotifier.getMaleSneaker();
+      productNotifier.getFemaleSneaker();
+      productNotifier.getKidsSneaker();
+
+      final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
+      favoritesNotifier.getFavorite();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var productNotifier = Provider.of<ProductNotifierProvider>(context);
-    productNotifier.getMaleSneaker();
-    productNotifier.getFemaleSneaker();
-    productNotifier.getKidsSneaker();
 
     var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
       context,
       listen: true,
     );
-    favoritesNotifier.getFavorite();
 
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),
@@ -46,7 +51,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/top_image.png'),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
               child: Container(

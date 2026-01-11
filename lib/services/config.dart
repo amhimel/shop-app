@@ -1,5 +1,5 @@
 class Config {
-  static const String apiUrl = "localhost:3000";
+  static const String apiUrl = "192.168.0.106:3005";
   static const String paymentBaseUrl = "http://server-production-28e7.up.railway.app";
   static const String paymentUrl = "/stripe/create-checkout-session";
   static const String loginUrl = "/api/login";
