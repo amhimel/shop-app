@@ -1,8 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart' as the_bundle;
 import 'package:http/http.dart' as http;
 import 'package:shop_app/views/shared/export_files.dart';
+import 'package:shop_app/models/sneakers_model.dart';
+
 
 // this class can be used to get data from api but currently it's not have any api.now we get data from local json file
 class Helper {
@@ -65,7 +65,7 @@ class Helper {
       //this will get all product
       final womenList = sneakersFromJson(response.body);
       //now we need to separate kids sneaker
-      var women = womenList.where((element) => element.category == "Women's Running");
+      var women = womenList.where((element) => element.category == "Women's Shoes");
       return women.toList();
     }else{
       throw Exception("Failed to get women product list");

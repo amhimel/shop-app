@@ -1,6 +1,7 @@
-
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
+import 'package:shop_app/models/sneakers_model.dart';
+
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.id, required this.category});

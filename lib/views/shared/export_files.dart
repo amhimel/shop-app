@@ -1,7 +1,6 @@
 export  'package:shop_app/controllers/cart_provider.dart';
 export  'package:shop_app/controllers/favorites_provider.dart';
 export 'package:shop_app/controllers/product_page_controller.dart';
-export 'package:shop_app/models/sneakers_model.dart';
 export 'package:shop_app/views/shared/appstyle.dart';
 export 'package:shop_app/views/shared/check_out_btn.dart';
 export 'package:shop_app/views/shared/reusebletext.dart';

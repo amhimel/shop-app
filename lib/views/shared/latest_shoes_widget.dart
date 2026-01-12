@@ -1,5 +1,7 @@
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
+import 'package:shop_app/models/sneakers_model.dart';
+
 
 class LatestShoes extends StatelessWidget {
   const LatestShoes({super.key, required Future<List<Sneakers>> sneaker})

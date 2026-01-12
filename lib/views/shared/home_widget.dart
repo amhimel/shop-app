@@ -1,3 +1,4 @@
+import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 

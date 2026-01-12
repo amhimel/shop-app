@@ -17,26 +17,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
+    //   productNotifier.getMaleSneaker();
+    //   productNotifier.getFemaleSneaker();
+    //   productNotifier.getKidsSneaker();
+    //
+    //   final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
+    //   favoritesNotifier.getFavorite();
+    // });
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
-      productNotifier.getMaleSneaker();
-      productNotifier.getFemaleSneaker();
-      productNotifier.getKidsSneaker();
 
-      final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
-      favoritesNotifier.getFavorite();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var productNotifier = Provider.of<ProductNotifierProvider>(context);
+    final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
+    productNotifier.getMaleSneaker();
+    productNotifier.getFemaleSneaker();
+    productNotifier.getKidsSneaker();
 
-    var favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
-      context,
-      listen: true,
-    );
+    final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
+    favoritesNotifier.getFavorite();
 
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),

@@ -1,7 +1,6 @@
-
-
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
 
