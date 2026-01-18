@@ -15,7 +15,7 @@ class LatestShoes extends StatelessWidget {
       future: _sneaker,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator.adaptive());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -36,10 +36,22 @@ class LatestShoes extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               final shoes = snapshot.data![index];
-              return StaggerTile(
-                imageUrl: shoes.imageUrl[1],
-                name: shoes.name,
-                price: shoes.price,
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductPage(
+                        sneakers: shoes,
+                      ),
+                    ),
+                  );
+                },
+                child: StaggerTile(
+                  imageUrl: shoes.imageUrl[1],
+                  name: shoes.name,
+                  price: shoes.price,
+                ),
               );
             },
           );

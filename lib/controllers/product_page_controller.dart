@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/services/helper.dart';
+import 'package:shop_app/models/sneakers_model.dart';
 
 class ProductNotifierProvider extends ChangeNotifier {
   int _activePage = 0;
-  List<dynamic> _shoeSizes = [];
+  List<Size> _shoeSizes = [];
   List<String> _sizes = [];
 
   int get activePage => _activePage;
 
-  List<dynamic> get shoeSizes => _shoeSizes;
+  List<Size> get shoeSizes => _shoeSizes;
   List<String> get sizes => _sizes;
 
   set activePage(int index) {
@@ -17,7 +18,7 @@ class ProductNotifierProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set shoeSizes(List<dynamic> newShoes) {
+  set shoeSizes(List<Size> newShoes) {
     _shoeSizes = newShoes;
     notifyListeners();
   }
@@ -29,11 +30,11 @@ class ProductNotifierProvider extends ChangeNotifier {
 
   //check size selection index
   void toggleCheck(int index) {
-    for (int i = 0; i < _shoeSizes.length; i++) {
-      if (i == index) {
-        _shoeSizes[i]['isSelected'] = !_shoeSizes[i]['isSelected'];
-      }
-    }
+    _shoeSizes[index] = Size(
+      size: _shoeSizes[index].size,
+      isSelected: !_shoeSizes[index].isSelected,
+      id: _shoeSizes[index].id,
+    );
     notifyListeners();
   }
 

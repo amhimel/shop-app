@@ -72,6 +72,18 @@ class Helper {
     }
   }
 
+  Future<List<Sneakers>> search(String searchQuery) async {
+    var url = Uri.http(Config.apiUrl , "${Config.search}$searchQuery");
+    var response = await client.get(url);
+    if(response.statusCode == 200) {
+      //this will get searched  product
+      final result = sneakersFromJson(response.body);
+      return result;
+    }else{
+      throw Exception("Failed to get women product list");
+    }
+  }
+
   // get kid sneaker by id
   Future<Sneakers> getKidSneakersByIds(String id) async {
     final String data = await the_bundle.rootBundle.loadString(

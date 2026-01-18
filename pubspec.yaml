@@ -75,6 +75,7 @@ flutter:
     - assets/images/gucci.jpg
     - assets/images/jordan.jpg
     - assets/images/nike.jpg
+    - assets/images/search.png
     - assets/json/kids_shoes.json
     - assets/json/men_shoes.json
     - assets/json/women_shoes.json

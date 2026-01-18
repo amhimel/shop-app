@@ -25,7 +25,7 @@ class HomeWidget extends StatelessWidget {
             future: _sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator.adaptive());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -44,8 +44,7 @@ class HomeWidget extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ProductPage(
-                              id: shoe.id,
-                              category: shoe.category,
+                               sneakers: shoe,
                             ),
                           ),
                         );
@@ -109,7 +108,7 @@ class HomeWidget extends StatelessWidget {
             future: _sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator.adaptive());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -123,7 +122,20 @@ class HomeWidget extends StatelessWidget {
                     final sneaker = menSneaker[index];
                     return Padding(
                       padding: EdgeInsets.all(8.w),
-                      child: NewShoes(imageUrl: sneaker.imageUrl[1]),
+                      child: NewShoes(
+                        imageUrl: sneaker.imageUrl[1],
+                        onTap: () {
+                        productNotifierProvider.shoeSizes = sneaker.sizes;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductPage(
+                              sneakers: sneaker,
+                            ),
+                          ),
+                        );
+
+                      },),
                     );
                   },
                 );
