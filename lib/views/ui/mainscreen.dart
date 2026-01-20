@@ -4,8 +4,9 @@
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
-class Mainscreen extends StatelessWidget {
-   Mainscreen({super.key});
+
+class MainScreen extends StatelessWidget {
+   MainScreen({super.key});
 
   final List<Widget> pageList = [
     const HomePage(),

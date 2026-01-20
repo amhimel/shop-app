@@ -1,7 +1,6 @@
-
-
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
+
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -140,7 +139,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Mainscreen(),
+                                      builder: (context) => MainScreen(),
                                     ),
                                   );
                                 },

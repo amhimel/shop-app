@@ -46,6 +46,8 @@ dependencies:
   flutter_vector_icons: ^2.0.0
   flutter_screenutil: ^5.9.3
   http: ^1.6.0
+  flutter_svg: ^2.2.3
+  shared_preferences: ^2.5.4
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,9 @@ flutter:
     - assets/images/jordan.jpg
     - assets/images/nike.jpg
     - assets/images/search.png
+    - assets/images/bg.jpg
+    - assets/images/user.jpg
+    - assets/images/bng.svg
     - assets/json/kids_shoes.json
     - assets/json/men_shoes.json
     - assets/json/women_shoes.json

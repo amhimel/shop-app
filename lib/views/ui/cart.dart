@@ -54,7 +54,7 @@ class CartPage extends StatelessWidget {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => Mainscreen(),
+                                        builder: (context) => MainScreen(),
                                       ),
                                     );
                                   },
@@ -108,7 +108,7 @@ class CartPage extends StatelessWidget {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Mainscreen(),
+                                                        MainScreen(),
                                                   ),
                                                 );
                                               },

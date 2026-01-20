@@ -25,5 +25,10 @@ export 'package:shop_app/views/shared/latest_shoes_widget.dart';
 export 'package:shop_app/app.dart';
 export 'package:shop_app/services/config.dart';
 export 'package:shop_app/views/shared/custom_field.dart';
+export 'package:shop_app/views/ui/non_user.dart';
+export 'package:shop_app/views/ui/auth/login_page.dart';
+export 'package:shop_app/views/shared/tiles_widget.dart';
+export 'package:shop_app/views/ui/auth/register_page.dart';
+export 'package:shop_app/controllers/login_notifier.dart';
 
 

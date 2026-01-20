@@ -1,3 +1,4 @@
+import 'package:shop_app/controllers/login_notifier.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
@@ -18,6 +19,7 @@ void main() async {
           create: (context) => FavoritesProviderNotifier(),
         ),
         ChangeNotifierProvider(create: (context) => CartProviderNotifier()),
+        ChangeNotifierProvider(create: (context) => LoginNotifierProvider()),
       ],
       child: MyApp(),
     ),

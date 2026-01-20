@@ -1,7 +1,6 @@
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -15,8 +14,11 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'Shop App',
-          theme: ThemeData(primarySwatch: Colors.blue),
-          home: Mainscreen(),
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Color(0xFFE2E2E2),
+          ),
+          home: MainScreen(),
           debugShowCheckedModeBanner: false,
         );
       },
