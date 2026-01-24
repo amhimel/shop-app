@@ -15,9 +15,8 @@ class LoginResponseModel {
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
-      id: json['_id'],
-      token: json['token'],
+      id: json['_id']?.toString() ?? '',
+      token: json['token'] ?? '',
     );
   }
-
 }

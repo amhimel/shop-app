@@ -1,5 +1,7 @@
+import 'package:shop_app/models/auth/signup_model.dart';
 import '../../shared/export_packages.dart';
 import '../../shared/export_files.dart';
+import 'dart:developer';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,6 +14,18 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+
+  bool validation = false;
+
+  void formValidation() {
+    if (emailCtrl.text.isNotEmpty &&
+        passwordCtrl.text.isNotEmpty &&
+        userNameCtrl.text.isNotEmpty) {
+      validation = true;
+    } else {
+      validation = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +127,31 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             SizedBox(height: 40.h),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                formValidation();
+                if (validation) {
+                  log("form  valid.");
+                  SignUpModel signUpModel = SignUpModel(
+                    username: userNameCtrl.text,
+                    email: emailCtrl.text,
+                    password: passwordCtrl.text,
+                    location: 'Not set',
+                  );
+                  authNotifier.registerUser(signUpModel).then((response) {
+                    if (response == true) {
+                      log("Sign Up Done ");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    } else {
+                      log("Failed to Sign Up ");
+                    }
+                  });
+                } else {
+                  log("form not valid.");
+                }
+              },
               child: Container(
                 height: 55.h,
                 width: 300.h,

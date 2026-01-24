@@ -1,42 +1,39 @@
-// To parse this JSON data, do
-//
-//     final signUpModel = signUpModelFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-SignUpModel signUpModelFromJson(String str) => SignUpModel.fromJson(json.decode(str));
+SignUpModel signUpModelFromJson(String str) =>
+    SignUpModel.fromJson(json.decode(str));
 
-String signUpModelToJson(SignUpModel data) => json.encode(data.toJson());
+String signUpModelToJson(SignUpModel data) =>
+    json.encode(data.toJson());
 
 class SignUpModel {
-  final String id;
   final String username;
   final String email;
-  final String location;
-  final String token;
+  final String password;
+  final String? location;
 
   SignUpModel({
-    required this.id,
     required this.username,
     required this.email,
-    required this.location,
-    required this.token,
+    required this.password,
+    this.location,
   });
 
-  factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
-    id: json["_id"],
-    username: json["username"],
-    email: json["email"],
-    location: json["location"],
-    token: json["token"],
-  );
+  factory SignUpModel.fromJson(Map<String, dynamic> json) {
+    return SignUpModel(
+      username: json['username'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      location: json['location'] ?? 'Not set',
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "username": username,
-    "email": email,
-    "location": location,
-    "token": token,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'email': email,
+      'password': password,
+      'location': location,
+    };
+  }
 }

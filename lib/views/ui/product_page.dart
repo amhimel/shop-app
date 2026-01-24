@@ -1,10 +1,14 @@
+import 'dart:developer';
+
+import 'package:shop_app/models/cart/addToCart.dart';
+import 'package:shop_app/services/cart_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 import 'package:shop_app/models/sneakers_model.dart';
 
-
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key, required this.sneakers});
+
   final Sneakers sneakers;
 
   @override
@@ -13,6 +17,22 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final PageController pageController = PageController();
+  @override
+  void initState() {
+    super.initState();
+    final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
+      context,
+      listen: false,
+    );
+    favoritesNotifier.getFavorite();
+
+    final productNotifier = Provider.of<ProductNotifierProvider>(
+      context,
+      listen: false,
+    );
+    productNotifier.getShoes(widget.sneakers.category, widget.sneakers.id);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +42,8 @@ class _ProductPageState extends State<ProductPage> {
     );
     var cartNotifier = Provider.of<CartProviderNotifier>(context, listen: true);
     var productNotifier = Provider.of<ProductNotifierProvider>(context);
-    favoritesNotifier.getFavorite();
-    productNotifier.getShoes(widget.sneakers.category, widget.sneakers.id);
+    var authNotifier = Provider.of<LoginNotifierProvider>(context);
+
     return Scaffold(
       body: Consumer<ProductNotifierProvider>(
         builder: (context, productNotifierProvider, child) {
@@ -45,62 +65,57 @@ class _ProductPageState extends State<ProductPage> {
                         child: Icon(Ionicons.close, color: Colors.black),
                       ),
                       Consumer<FavoritesProviderNotifier>(
-                        builder:
-                            (
-                            context,
-                            favoritesProviderNotifier,
-                            child,
-                            ) {
+                        builder: (context, favoritesProviderNotifier, child) {
                           return GestureDetector(
                             onTap: () {
-                              if (favoritesProviderNotifier
-                                  .ids
-                                  .contains(widget.sneakers.id)) {
+                              if (authNotifier.loggedIn == true) {
+                                if (favoritesProviderNotifier.ids.contains(
+                                  widget.sneakers.id,
+                                )) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FavoritesPage(),
+                                    ),
+                                  );
+                                } else {
+                                  favoritesNotifier.createFav({
+                                    "id": widget.sneakers.id,
+                                    "name": widget.sneakers.name,
+                                    "category": widget.sneakers.category,
+                                    "price": widget.sneakers.price,
+                                    "imageUrl": widget.sneakers.imageUrl[0],
+                                  });
+
+                                  setState(() {});
+                                }
+                              } else {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        FavoritesPage(),
+                                    builder: (context) => LoginPage(),
                                   ),
                                 );
-                              } else {
-                                favoritesNotifier
-                                    .createFav({
-                                  "id": widget.sneakers.id,
-                                  "name":
-                                  widget.sneakers.name,
-                                  "category": widget.sneakers
-                                      .category,
-                                  "price":
-                                  widget.sneakers.price,
-                                  "imageUrl": widget.sneakers
-                                      .imageUrl[0],
-                                });
-
-                                setState(() {});
                               }
                             },
                             child:
-                            favoritesProviderNotifier
-                                .ids
-                                .contains(widget.sneakers.id)
+                                favoritesProviderNotifier.ids.contains(
+                                  widget.sneakers.id,
+                                )
                                 ? Icon(
-                              Icons
-                                  .favorite_outline_rounded,
-                              color: Colors.red,
+                                    Icons.favorite_outline_rounded,
+                                    color: Colors.red,
 
-                              size: 24.sp,
-                            )
+                                    size: 24.sp,
+                                  )
                                 : Icon(
-                              Icons
-                                  .favorite_outline_rounded,
-                              color: Colors.black,
-                              size: 24.sp,
-                            ),
+                                    Icons.favorite_outline_rounded,
+                                    color: Colors.black,
+                                    size: 24.sp,
+                                  ),
                           );
                         },
                       ),
-
                     ],
                   ),
                 ),
@@ -147,20 +162,19 @@ class _ProductPageState extends State<ProductPage> {
                                   left: 0,
                                   height: 0.3.sh,
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: List<Widget>.generate(
                                       widget.sneakers.imageUrl.length,
-                                          (index) => Padding(
+                                      (index) => Padding(
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 4.w,
                                         ),
                                         child: CircleAvatar(
                                           radius: 5.r,
                                           backgroundColor:
-                                          productNotifierProvider
-                                              .activePage !=
-                                              index
+                                              productNotifierProvider
+                                                      .activePage !=
+                                                  index
                                               ? Colors.grey
                                               : Colors.black,
                                         ),
@@ -188,8 +202,7 @@ class _ProductPageState extends State<ProductPage> {
                               padding: EdgeInsets.all(12.w),
                               child: SingleChildScrollView(
                                 child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ReusableText(
                                       text: widget.sneakers.name,
@@ -217,16 +230,14 @@ class _ProductPageState extends State<ProductPage> {
                                           allowHalfRating: true,
                                           itemCount: 5,
                                           itemSize: 22.sp,
-                                          itemPadding:
-                                          EdgeInsets.symmetric(
+                                          itemPadding: EdgeInsets.symmetric(
                                             horizontal: 1.w,
                                           ),
-                                          itemBuilder: (context, _) =>
-                                              Icon(
-                                                Icons.star,
-                                                size: 18.sp,
-                                                color: Colors.black,
-                                              ),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            size: 18.sp,
+                                            color: Colors.black,
+                                          ),
                                           onRatingUpdate: (rating) {},
                                         ),
                                       ],
@@ -234,7 +245,7 @@ class _ProductPageState extends State<ProductPage> {
                                     SizedBox(height: 20.h),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         ReusableText(
                                           text: '\$${widget.sneakers.price}',
@@ -257,8 +268,7 @@ class _ProductPageState extends State<ProductPage> {
                                             SizedBox(width: 5.w),
                                             CircleAvatar(
                                               radius: 7.r,
-                                              backgroundColor:
-                                              Colors.black,
+                                              backgroundColor: Colors.black,
                                             ),
                                             SizedBox(width: 5.w),
                                             CircleAvatar(
@@ -298,20 +308,17 @@ class _ProductPageState extends State<ProductPage> {
                                         SizedBox(
                                           height: 40.h,
                                           child: ListView.builder(
-                                            scrollDirection:
-                                            Axis.horizontal,
+                                            scrollDirection: Axis.horizontal,
                                             padding: EdgeInsets.zero,
-                                            itemCount:
-                                            productNotifierProvider
+                                            itemCount: productNotifierProvider
                                                 .shoeSizes
                                                 .length,
                                             itemBuilder: (context, index) {
                                               final sizes =
-                                              productNotifierProvider
-                                                  .shoeSizes[index];
+                                                  productNotifierProvider
+                                                      .shoeSizes[index];
                                               return Padding(
-                                                padding:
-                                                EdgeInsets.symmetric(
+                                                padding: EdgeInsets.symmetric(
                                                   horizontal: 8.w,
                                                 ),
                                                 child: ChoiceChip(
@@ -325,32 +332,23 @@ class _ProductPageState extends State<ProductPage> {
                                                           : Colors.black,
                                                     ),
                                                   ),
-                                                  selected:
-                                                  sizes.isSelected,
-                                                  selectedColor:
-                                                  Colors.black,
-                                                  padding:
-                                                  EdgeInsets.symmetric(
+                                                  selected: sizes.isSelected,
+                                                  selectedColor: Colors.black,
+                                                  padding: EdgeInsets.symmetric(
                                                     vertical: 8.h,
                                                   ),
                                                   onSelected: (newState) {
                                                     //add selected size on list
                                                     if (productNotifierProvider
                                                         .sizes
-                                                        .contains(
-                                                      sizes.size,
-                                                    )) {
+                                                        .contains(sizes.size)) {
                                                       productNotifierProvider
                                                           .sizes
-                                                          .remove(
-                                                        sizes.size,
-                                                      );
+                                                          .remove(sizes.size);
                                                     } else {
                                                       productNotifierProvider
                                                           .sizes
-                                                          .add(
-                                                        sizes.size,
-                                                      );
+                                                          .add(sizes.size);
                                                     }
 
                                                     print(
@@ -358,24 +356,20 @@ class _ProductPageState extends State<ProductPage> {
                                                           .sizes,
                                                     );
                                                     productNotifierProvider
-                                                        .toggleCheck(
-                                                      index,
-                                                    );
+                                                        .toggleCheck(index);
                                                   },
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                      60.r,
-                                                    ),
+                                                        BorderRadius.circular(
+                                                          60.r,
+                                                        ),
                                                     side: BorderSide(
                                                       color: Colors.black,
                                                       width: 1,
-                                                      style: BorderStyle
-                                                          .solid,
+                                                      style: BorderStyle.solid,
                                                     ),
                                                   ),
-                                                  disabledColor:
-                                                  Colors.white,
+                                                  disabledColor: Colors.white,
                                                 ),
                                               );
                                             },
@@ -415,9 +409,7 @@ class _ProductPageState extends State<ProductPage> {
                                     Align(
                                       alignment: Alignment.bottomCenter,
                                       child: Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 12.h,
-                                        ),
+                                        padding: EdgeInsets.only(top: 12.h),
                                         child: CheckOutButtonWidget(
                                           onTap: () async {
                                             if (productNotifierProvider
@@ -434,23 +426,38 @@ class _ProductPageState extends State<ProductPage> {
                                               );
                                               return;
                                             }
-                                            cartNotifier.createCart({
-                                              "id": widget.sneakers.id,
-                                              "name": widget.sneakers.name,
-                                              "category":
-                                              widget.sneakers.category,
-                                              "sizes": List<String>.from(
-                                                productNotifierProvider
-                                                    .sizes,
-                                              ),
-                                              "imageUrl":
-                                              widget.sneakers.imageUrl[0],
-                                              "price": widget.sneakers.price,
-                                              "qty": 1,
-                                            });
-                                            productNotifierProvider.sizes
-                                                .clear();
-                                            Navigator.pop(context);
+
+                                            if (authNotifier.loggedIn == true) {
+                                              AddToCart model = AddToCart(
+                                                cartItem: widget.sneakers.id,
+                                                quantity: 1,
+                                              );
+                                              CartHelper().addToCart(model);
+                                              log("Add to cart ${model.toString()}");
+                                              // cartNotifier.createCart({
+                                              //   "id": widget.sneakers.id,
+                                              //   "name": widget.sneakers.name,
+                                              //   "category":
+                                              //       widget.sneakers.category,
+                                              //   "sizes": List<String>.from(
+                                              //     productNotifierProvider.sizes,
+                                              //   ),
+                                              //   "imageUrl":
+                                              //       widget.sneakers.imageUrl[0],
+                                              //   "price": widget.sneakers.price,
+                                              //   "qty": 1,
+                                              // });
+                                              //productNotifierProvider.sizes.clear();
+                                              //Navigator.pop(context);
+                                            } else {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      LoginPage(),
+                                                ),
+                                              );
+                                            }
                                           },
                                           label: 'Add to cart',
                                         ),
@@ -470,7 +477,7 @@ class _ProductPageState extends State<ProductPage> {
             ],
           );
         },
-      )
+      ),
     );
   }
 }

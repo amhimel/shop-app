@@ -10,6 +10,7 @@ class ProductCard extends StatefulWidget {
     required this.price,
     required this.id,
   });
+
   final String name;
   final String category;
   final String image;
@@ -63,38 +64,61 @@ class _ProductCardState extends State<ProductCard> {
                   Positioned(
                     top: 10.h,
                     right: 10.w,
-                    child: GestureDetector(
-                      onTap: () async {
-                        if (favoritesNotifier.ids.contains(widget.id)) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FavoritesPage(),
-                            ),
-                          );
-                        } else {
-                          favoritesNotifier.createFav({
-                            "id": widget.id,
-                            "name": widget.name,
-                            "category": widget.category,
-                            "price": widget.price,
-                            "imageUrl": widget.image,
-                          });
+                    child: Consumer<FavoritesProviderNotifier>(
+                      builder:
+                          (BuildContext context, favoritesNotifier, child) {
+                            return Consumer<LoginNotifierProvider>(
+                              builder:
+                                  (BuildContext context, authProvider, child) {
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        if(authProvider.loggedIn == true){
+                                          if (favoritesNotifier.ids.contains(
+                                            widget.id,
+                                          )) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FavoritesPage(),
+                                              ),
+                                            );
+                                          } else {
+                                            favoritesNotifier.createFav({
+                                              "id": widget.id,
+                                              "name": widget.name,
+                                              "category": widget.category,
+                                              "price": widget.price,
+                                              "imageUrl": widget.image,
+                                            });
 
-                          setState(() {});
-                        }
-                      },
-                      child: favoritesNotifier.ids.contains(widget.id)
-                          ? Icon(
-                              Icons.favorite_outline_rounded,
-                              color: Colors.red,
-                              size: 24.sp,
-                            )
-                          : Icon(
-                              Icons.favorite_outline_rounded,
-                              color: Colors.black,
-                              size: 24.sp,
-                            ),
+                                            setState(() {});
+                                          }
+                                        }else{
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => LoginPage()),
+                                          );
+                                        }
+                                      },
+                                      child:
+                                          favoritesNotifier.ids.contains(
+                                            widget.id,
+                                          )
+                                          ? Icon(
+                                              Icons.favorite_outline_rounded,
+                                              color: Colors.red,
+                                              size: 24.sp,
+                                            )
+                                          : Icon(
+                                              Icons.favorite_outline_rounded,
+                                              color: Colors.black,
+                                              size: 24.sp,
+                                            ),
+                                    );
+                                  },
+                            );
+                          },
                     ),
                   ),
                 ],

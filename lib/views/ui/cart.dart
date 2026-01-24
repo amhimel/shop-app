@@ -1,11 +1,24 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shop_app/services/cart_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
+import '../../models/cart/getCart.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  late Future<List<Product>> _cartList;
+@override
+  void initState() {
+    _cartList = CartHelper().getCart();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var cartNotifier = Provider.of<CartProviderNotifier>(context, listen: true);
@@ -100,7 +113,7 @@ class CartPage extends StatelessWidget {
                                           Positioned(
                                             bottom: -2,
                                             child: GestureDetector(
-                                              onTap: (){
+                                              onTap: () {
                                                 cartNotifier.deleteCart(
                                                   data['key'],
                                                 );
@@ -118,7 +131,10 @@ class CartPage extends StatelessWidget {
                                                 decoration: BoxDecoration(
                                                   color: Colors.black,
                                                   borderRadius:
-                                                      BorderRadius.only(topRight: Radius.circular(12)),
+                                                      BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(12),
+                                                      ),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.black

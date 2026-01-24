@@ -34,15 +34,17 @@ class Sneakers {
   });
 
   factory Sneakers.fromJson(Map<String, dynamic> json) => Sneakers(
-    id: json["_id"],
-    name: json["name"],
-    title: json["title"],
-    category: json["category"],
-    imageUrl: List<String>.from(json["imageUrl"].map((x) => x)),
-    oldPrice: json["oldPrice"],
+    id: json["_id"] as String? ?? '',
+    name: json["name"] as String? ?? 'Unknown',
+    title: json["title"] as String? ?? 'Unknown',
+    category: json["category"] as String? ?? 'General',
+    imageUrl: json['imageUrl'] != null
+        ? List<String>.from(json['imageUrl'] as List)
+        : [],
+    oldPrice: json["oldPrice"] as String? ?? "5",
     sizes: List<Size>.from(json["sizes"].map((x) => Size.fromJson(x))),
-    price: json["price"],
-    description: json["description"],
+    price: json["price"] as String? ?? "5",
+    description: json["description"] as String? ?? '',
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],

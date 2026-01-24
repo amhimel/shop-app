@@ -14,31 +14,32 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     vsync: this,
   );
 
-
   @override
   void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
-    //   productNotifier.getMaleSneaker();
-    //   productNotifier.getFemaleSneaker();
-    //   productNotifier.getKidsSneaker();
-    //
-    //   final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
-    //   favoritesNotifier.getFavorite();
-    // });
     super.initState();
 
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final productNotifier = Provider.of<ProductNotifierProvider>(context, listen: false);
+    final productNotifier = Provider.of<ProductNotifierProvider>(
+      context,
+      listen: false,
+    );
     productNotifier.getMaleSneaker();
     productNotifier.getFemaleSneaker();
     productNotifier.getKidsSneaker();
 
-    final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context, listen: false);
+    final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(
+      context,
+      listen: false,
+    );
     favoritesNotifier.getFavorite();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final productNotifier = Provider.of<ProductNotifierProvider>(context);
+    final favoritesNotifier = Provider.of<FavoritesProviderNotifier>(context);
+
+    var authNotifier = Provider.of<LoginNotifierProvider>(context);
+    authNotifier.getPrefs();
 
     return Scaffold(
       backgroundColor: Color(0xFFE2E2E2),

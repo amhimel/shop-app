@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:shop_app/models/auth/login_model.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import '../../shared/export_packages.dart';
 
@@ -113,7 +113,21 @@ class _LoginPageState extends State<LoginPage> {
               onTap: () {
                 formValidation();
                 if (validation) {
-                  log("form is validated.");
+                  LoginModel loginModel = LoginModel(
+                    email: emailCtrl.text,
+                    password: passwordCtrl.text,
+                  );
+                  authNotifier.userLogin(loginModel).then((response) {
+                    if (response == true) {
+                      log("logged in ");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainScreen()),
+                      );
+                    } else {
+                      log("Failed to login.");
+                    }
+                  });
                 } else {
                   log("form not validated.");
                 }
