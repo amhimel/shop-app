@@ -7,8 +7,8 @@ class Config {
   static const String getCartUrl = "/api/cart/find";
   static const String addCartUrl = "/api/cart";
   static const String getUserUrl = "/api/users/";
-  static const String sneakers = "/api/products";
-  static const String orders = "/api/orders";
-  static const String search = "/api/products/search/";
+  static const String productsUrl = "/api/products";
+  static const String ordersUrl = "/api/orders";
+  static const String searchUrl = "/api/products/search/";
   //static const String profile = "/api/profile/";
 }

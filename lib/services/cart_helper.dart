@@ -40,6 +40,32 @@ class CartHelper {
     }
   }
 
+  Future<bool> deleteCart(String id) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userToken = prefs.getString('userToken');
+
+    if (userToken == null || userToken.isEmpty) {
+      throw Exception("User token not found. Please login again.");
+    }
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $userToken',
+    };
+
+    var url = Uri.http(Config.apiUrl, "${Config.addCartUrl}/$id");
+    var response = await client.delete(url, headers: requestHeaders);
+
+    print('Token: $userToken');
+    print('Response Status: ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<List<Product>> getCart() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userToken = prefs.getString('userToken');

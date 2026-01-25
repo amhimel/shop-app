@@ -432,7 +432,7 @@ class _ProductPageState extends State<ProductPage> {
                                                 cartItem: widget.sneakers.id,
                                                 quantity: 1,
                                               );
-                                              CartHelper().addToCart(model);
+                                              await CartHelper().addToCart(model);
                                               log("Add to cart ${model.toString()}");
                                               // cartNotifier.createCart({
                                               //   "id": widget.sneakers.id,

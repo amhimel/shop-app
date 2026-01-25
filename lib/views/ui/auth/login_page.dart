@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(builder: (context) => MainScreen()),
                       );
                     } else {
-                      log("Failed to login.");
+                      log("Failed to login. Response: $response");
                     }
                   });
                 } else {
