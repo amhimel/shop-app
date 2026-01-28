@@ -30,5 +30,6 @@ export 'package:shop_app/views/ui/auth/login_page.dart';
 export 'package:shop_app/views/shared/tiles_widget.dart';
 export 'package:shop_app/views/ui/auth/register_page.dart';
 export 'package:shop_app/controllers/login_notifier.dart';
+export 'package:shop_app/models/orders/order.dart';
 
 
