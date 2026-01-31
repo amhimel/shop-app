@@ -35,6 +35,7 @@ class Product {
 // Product Item Model
 class ProductItem {
   String id;
+  String title;
   String name;
   String category;
   List<String> imageUrl;
@@ -42,6 +43,7 @@ class ProductItem {
 
   ProductItem({
     required this.id,
+    required this.title,
     required this.name,
     required this.category,
     required this.imageUrl,
@@ -50,9 +52,11 @@ class ProductItem {
 
   factory ProductItem.fromJson(Map<String, dynamic> json) => ProductItem(
     id: json["_id"],
+    title: json["title"],
     name: json["name"],
     category: json["category"],
     imageUrl: List<String>.from(json["imageUrl"].map((x) => x)),
     price: json["price"],
   );
 }
+

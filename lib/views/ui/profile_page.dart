@@ -1,6 +1,7 @@
 import 'package:shop_app/services/auth_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
+import 'package:shop_app/views/ui/orders/orders_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -188,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    builder: (context) => ProcessOrders(),
                                   ),
                                 );
                               },

@@ -9,8 +9,8 @@ export 'package:shop_app/controllers/main_screen_notifier_provider.dart';
 export 'package:shop_app/views/shared/bottom_nav_widget.dart';
 export 'package:shop_app/views/shared/new_shoes.dart';
 export 'package:shop_app/views/shared/product_card.dart';
-export 'package:shop_app/views/ui/product_by_card.dart';
-export 'package:shop_app/views/ui/product_page.dart';
+export 'package:shop_app/views/ui/product/product_by_card.dart';
+export 'package:shop_app/views/ui/product/product_page.dart';
 export 'package:shop_app/views/shared/stagger_tile.dart';
 export 'package:shop_app/views/ui/mainscreen.dart';
 export 'package:shop_app/views/shared/home_widget.dart';
@@ -30,6 +30,5 @@ export 'package:shop_app/views/ui/auth/login_page.dart';
 export 'package:shop_app/views/shared/tiles_widget.dart';
 export 'package:shop_app/views/ui/auth/register_page.dart';
 export 'package:shop_app/controllers/login_notifier.dart';
-export 'package:shop_app/models/orders/order.dart';
 
 

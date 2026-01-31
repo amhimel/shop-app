@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:shop_app/models/cart/addToCart.dart';
+import 'package:shop_app/models/orders/order_res.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -97,4 +98,35 @@ class CartHelper {
       throw Exception("Failed get cart item: ${response.statusCode}");
     }
   }
+
+  Future<List<PaidOrders>> getOrders() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userToken = prefs.getString('userToken');
+
+    if (userToken == null || userToken.isEmpty) {
+      throw Exception("User token not found. Please login again.");
+    }
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'token': 'Bearer $userToken',
+    };
+
+    final url = Uri.http(Config.apiUrl, Config.ordersUrl);
+    final response = await client.get(url, headers: headers);
+
+    log("Response Status: ${response.statusCode}");
+    log("Response Body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      final List<dynamic> decoded = jsonDecode(response.body);
+
+      return decoded
+          .map((e) => PaidOrders.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } else {
+      throw Exception("Failed get order item");
+    }
+  }
+
 }
