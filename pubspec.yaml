@@ -50,6 +50,7 @@ dependencies:
   shared_preferences: ^2.5.4
   webview_flutter: ^4.13.1
   shimmer: ^3.0.0
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  remove_alpha_ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -86,6 +92,7 @@ flutter:
     - assets/json/kids_shoes.json
     - assets/json/men_shoes.json
     - assets/json/women_shoes.json
+    - assets/icons/app_icon.png
 
   #   - images/a_dot_ham.jpeg
 

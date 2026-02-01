@@ -15,7 +15,7 @@ class LoadingComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Color(0xFFE1E0E0),
-      highlightColor: Theme.of(context).colorScheme.primaryContainer,
+      highlightColor: Color(0xFFA6A5A5),
       child: Container(
         width: width,
         height: height,
