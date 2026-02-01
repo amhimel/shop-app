@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:shop_app/services/cart_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
@@ -31,7 +29,12 @@ class _ProcessOrdersState extends State<ProcessOrders> {
         toolbarHeight: 40.h,
         backgroundColor: Colors.black,
         automaticallyImplyLeading: true,
-        leading: Icon(Icons.arrow_back_ios, color: Colors.white),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back_ios, color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -173,7 +176,8 @@ class _ProcessOrdersState extends State<ProcessOrders> {
                                           ),
                                         ),
                                         child: ReusableText(
-                                          text: order.paymentStatus.toUpperCase(),
+                                          text: order.paymentStatus
+                                              .toUpperCase(),
                                           style: appstyle(
                                             12,
                                             FontWeight.w600,
@@ -194,16 +198,18 @@ class _ProcessOrdersState extends State<ProcessOrders> {
                                           ),
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Icon(
                                               MaterialCommunityIcons
                                                   .truck_fast_outline,
                                               size: 16,
                                             ),
-                                            SizedBox(width: 5,),
+                                            SizedBox(width: 5),
                                             ReusableText(
-                                              text: order.deliveryStatus.toUpperCase(),
+                                              text: order.deliveryStatus
+                                                  .toUpperCase(),
                                               style: appstyle(
                                                 12,
                                                 FontWeight.normal,

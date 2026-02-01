@@ -2,6 +2,8 @@ import 'package:shop_app/models/sneakers_model.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
+import 'loading_effects/product_loading.dart';
+
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
     super.key,
@@ -25,7 +27,7 @@ class HomeWidget extends StatelessWidget {
             future: _sneaker,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator.adaptive());
+                return ProductLoading();
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

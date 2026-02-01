@@ -51,10 +51,10 @@ class ProductItem {
   });
 
   factory ProductItem.fromJson(Map<String, dynamic> json) => ProductItem(
-    id: json["_id"],
-    title: json["title"],
-    name: json["name"],
-    category: json["category"],
+    id: json["_id"] ?? "",
+    title: json["title"] ?? "",
+    name: json["name"] ?? "",
+    category: json["category"]?? "",
     imageUrl: List<String>.from(json["imageUrl"].map((x) => x)),
     price: json["price"],
   );

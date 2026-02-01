@@ -49,6 +49,7 @@ dependencies:
   flutter_svg: ^2.2.3
   shared_preferences: ^2.5.4
   webview_flutter: ^4.13.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

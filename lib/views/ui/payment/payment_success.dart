@@ -4,7 +4,7 @@ import '../../../controllers/payment_notifier_provider.dart';
 import '../mainscreen.dart';
 
 class PaymentSuccessful extends StatelessWidget {
-  const PaymentSuccessful({Key? key}) : super(key: key);
+  const PaymentSuccessful({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +28,17 @@ class PaymentSuccessful extends StatelessWidget {
             );
           },
           child: Container(
-            width: 140,
-            height: 140,
+            padding: EdgeInsets.all(10),
+            width: 80.w,
+            height: 80.h,
             decoration: const BoxDecoration(
-              color: Color(0xFF7CF4B5),
+              //color: Color(0xFF7CF4B5),
               shape: BoxShape.circle,
             ),
             child: const Center(
               child: Icon(
                 AntDesign.closecircle,
-                size: 70,
+                size: 40,
                 color: Colors.black,
               ),
             ),
