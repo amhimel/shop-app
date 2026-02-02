@@ -5,7 +5,6 @@ import 'package:shop_app/models/cart/addToCart.dart';
 import 'package:shop_app/models/orders/order_res.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/cart/getCart.dart';
 
 class CartHelper {
@@ -129,4 +128,25 @@ class CartHelper {
     }
   }
 
+  Future<bool> updateQuantity(String cartItemId, String action) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("userToken");
+
+    final url = Uri.https(Config.apiUrl, Config.updateCartUrl);
+
+    final response = await http.put(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "token": "Bearer $token",
+      },
+      body: jsonEncode({
+        "cartItemId": cartItemId,
+        "action": action, // inc / dec
+      }),
+    );
+
+    print("UPDATE STATUS: ${response.statusCode}");
+    return response.statusCode == 200;
+  }
 }

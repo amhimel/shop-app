@@ -1,6 +1,8 @@
 import 'package:shop_app/models/cart/getCart.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 
+import '../services/cart_helper.dart';
+
 class CartProviderNotifier extends ChangeNotifier {
   int _counter = 0;
 
@@ -38,41 +40,72 @@ class CartProviderNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  // List<dynamic> _cart = [];
-  // final _cartBox = Hive.box('cart_box');
+  List<Product> _cart = [];
+  bool _isLoading = false;
 
-  //List<dynamic> get cart => _cart;
+  List<Product> get cart => _cart;
 
-  // set cart(List<dynamic> newCart) {
-  //   _cart = newCart;
-  // }
+  bool get isLoading => _isLoading;
 
-  // getCart() {
-  //   final cartData = _cartBox.keys.map((key) {
-  //     final item = _cartBox.get(key);
-  //     print("Hive item: $item");
-  //     print("Hive item sizes: ${item['sizes']}");
-  //     return {
-  //       "key": key,
-  //       "id": item['id'],
-  //       "name": item['name'],
-  //       "category": item['category'],
-  //       "sizes": item['sizes'],
-  //       "imageUrl": item['imageUrl'],
-  //       "price": item['price'],
-  //       "qty": item['qty'],
-  //     };
-  //   }).toList();
-  //
-  //   _cart = cartData.reversed.toList();
-  // }
-  //
-  // Future<void> deleteCart(int key) async {
-  //   await _cartBox.delete(key);
-  // }
-  //
-  // // hive for local DB create cart
-  // Future<void> createCart(Map<String, dynamic> newCart) async {
-  //   await _cartBox.add(newCart);
-  // }
+  set cart(List<Product> newCart) {
+    _cart = newCart;
+    notifyListeners();
+  }
+
+  set isLoading(bool newState) {
+    _isLoading = newState;
+    notifyListeners();
+  }
+
+  Future<void> refreshCart() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _cart = await CartHelper().getCart();
+    } catch (e) {
+      debugPrint("Cart fetch error: $e");
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> updateQuantity(String cartId, String action) async {
+    if (_isLoading) return; // prevent spam tap
+
+    _isLoading = true;
+    notifyListeners();
+
+    final index = _cart.indexWhere((e) => e.id == cartId);
+    if (index == -1) {
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }
+
+    // 1️⃣ optimistic update
+    if (action == "inc") {
+      _cart[index].quantity++;
+    } else if (action == "dec" && _cart[index].quantity > 1) {
+      _cart[index].quantity--;
+    }
+
+    notifyListeners(); // ⚡ instant UI
+
+    // 2️⃣ server sync
+    final success = await CartHelper().updateQuantity(cartId, action);
+
+    // 3️⃣ rollback if failed
+    if (!success) {
+      if (action == "inc") {
+        _cart[index].quantity--;
+      } else {
+        _cart[index].quantity++;
+      }
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
 }
