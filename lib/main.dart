@@ -8,6 +8,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox("cart_box");
   await Hive.openBox("fav_box");
+  await Hive.openBox('userBox');
   runApp(
     //method that initialize app
     MultiProvider(

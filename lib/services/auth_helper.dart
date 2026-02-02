@@ -7,9 +7,11 @@ import 'package:shop_app/models/auth_response/profile_response_model.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import '../models/auth/login_model.dart';
 import 'package:shop_app/models/auth_response/login_response_model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthHelper {
   static var client = http.Client();
+  final Box _userBox = Hive.box('userBox');
 
   Future<bool> login(LoginModel model) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
@@ -42,6 +44,25 @@ class AuthHelper {
     return false;
   }
 
+  // ---------------- PROFILE (CACHE FIRST) ----------------
+  Future<ProfileRes> getProfileCached() async {
+    // 1 Hive cache check
+    final cached = _userBox.get('profile');
+    if (cached != null) {
+      log("PROFILE FROM HIVE");
+      return ProfileRes.fromJson(Map<String, dynamic>.from(cached));
+    }
+
+    // 2 API call
+    final profile = await getProfile();
+
+    // 3 Save to Hive
+    _userBox.put('profile', profile.toJson());
+
+    return profile;
+  }
+
+  // ----------------Get Profiles API ONLY ----------------
   Future<ProfileRes> getProfile() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userToken = prefs.getString('userToken');

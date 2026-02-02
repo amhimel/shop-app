@@ -7,8 +7,8 @@ import 'package:shop_app/services/payment_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
 import 'package:shop_app/views/shared/export_packages.dart';
 import 'package:shop_app/views/ui/payment/payment_webview.dart';
-import '../../models/cart/getCart.dart';
-import '../../models/orders/order_req.dart';
+import '../../../models/cart/getCart.dart';
+import '../../../models/orders/order_req.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

@@ -15,7 +15,7 @@ export 'package:shop_app/views/shared/stagger_tile.dart';
 export 'package:shop_app/views/ui/mainscreen.dart';
 export 'package:shop_app/views/shared/home_widget.dart';
 export 'package:shop_app/views/shared/bottom_nav.dart';
-export 'package:shop_app/views/ui/cart_page.dart';
+export 'package:shop_app/views/ui/cart/cart_page.dart';
 export 'package:shop_app/views/ui/home_page.dart';
 export 'package:shop_app/views/ui/profile_page.dart';
 export 'package:shop_app/views/ui/search_page.dart';

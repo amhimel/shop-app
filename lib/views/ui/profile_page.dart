@@ -84,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 5.0),
                                     child: FutureBuilder(
-                                      future: AuthHelper().getProfile(),
+                                      future: AuthHelper().getProfileCached(),
                                       builder: (context, snapShot) {
                                         if (snapShot.connectionState ==
                                             ConnectionState.waiting) {
