@@ -16,51 +16,57 @@ class AuthHelper {
   Future<bool> login(LoginModel model) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
 
-    var url = Uri.http(Config.apiUrl, Config.loginUrl);
+    var url = Uri.https(Config.apiUrl, Config.loginUrl);
+
     var response = await client.post(
       url,
       headers: requestHeaders,
       body: jsonEncode(model.toJson()),
     );
 
+    // 🔴 ADD THESE TWO LINES
+    print("Login Status: ${response.statusCode}");
+    print("Login Body: ${response.body}");
+
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       final loginResponse = loginResponseModelFromJson(response.body);
 
-      if (loginResponse.token == null || loginResponse.token!.isEmpty) {
-        throw Exception("Token missing from response");
-      }
-
-      await prefs.setString("userToken", loginResponse.token!);
-
-      // ✅ SAVE userId ONLY if not null
-      if (loginResponse.id != null) {
-        await prefs.setString("userId", loginResponse.id!);
-      }
-
+      await prefs.setString("userToken", loginResponse.token);
+      await prefs.setString("userId", loginResponse.id);
       await prefs.setBool("isLoggedIn", true);
+
       return true;
     }
+
     return false;
   }
 
-  // ---------------- PROFILE (CACHE FIRST) ----------------
   Future<ProfileRes> getProfileCached() async {
-    // 1 Hive cache check
     final cached = _userBox.get('profile');
+
     if (cached != null) {
-      log("PROFILE FROM HIVE");
+      log("👀 SHOWING HIVE PROFILE");
+
+      // 🔄 Refresh in background (DON'T await)
+      await getProfile().then((fresh) {
+        log("🔄 UPDATING HIVE FROM API");
+        _userBox.put('profile', fresh.toJson());
+      }).catchError((e) {
+        log("⚠️ API refresh failed: $e");
+      });
+
       return ProfileRes.fromJson(Map<String, dynamic>.from(cached));
     }
 
-    // 2 API call
+    // First time only
+    log("🌐 FIRST TIME PROFILE FROM API");
     final profile = await getProfile();
-
-    // 3 Save to Hive
     _userBox.put('profile', profile.toJson());
 
     return profile;
   }
+
 
   // ----------------Get Profiles API ONLY ----------------
   Future<ProfileRes> getProfile() async {
@@ -76,7 +82,7 @@ class AuthHelper {
       'token': 'Bearer $userToken',
     };
 
-    var url = Uri.http(Config.apiUrl, Config.getUserUrl);
+    var url = Uri.https(Config.apiUrl, Config.getUserUrl);
     var response = await client.get(url, headers: requestHeaders);
 
     print('Token: $userToken');
@@ -91,16 +97,39 @@ class AuthHelper {
   }
 
   Future<bool> signUp(SignUpModel model) async {
-    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
-    var url = Uri.http(Config.apiUrl, Config.signupUrl);
-    var response = await client.post(
-      url,
-      headers: requestHeaders,
-      body: jsonEncode(model.toJson()),
-    );
-    if (response.statusCode == 201) {
-      return true;
-    } else {
+    try {
+      var uri = Uri.https(Config.apiUrl, Config.signupUrl);
+      var request = http.MultipartRequest('POST', uri);
+
+      // ---------- TEXT FIELDS ----------
+      request.fields['username'] = model.username;
+      request.fields['email'] = model.email;
+      request.fields['password'] = model.password;
+
+      if (model.location != null) {
+        request.fields['location'] = model.location!;
+      }
+
+      // ---------- IMAGE FILE ----------
+      if (model.profilePhoto != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'profilePhoto',
+            model.profilePhoto!.path,
+          ),
+        );
+      }
+
+      // ---------- SEND ----------
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      log("Signup response: ${response.statusCode}");
+      log("Body: ${response.body}");
+
+      return response.statusCode == 201;
+    } catch (e) {
+      log("Signup error: $e");
       return false;
     }
   }

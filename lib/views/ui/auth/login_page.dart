@@ -114,8 +114,8 @@ class _LoginPageState extends State<LoginPage> {
                 formValidation();
                 if (validation) {
                   LoginModel loginModel = LoginModel(
-                    email: emailCtrl.text,
-                    password: passwordCtrl.text,
+                    email: emailCtrl.text.trim(),
+                    password: passwordCtrl.text.trim(),
                   );
                   authNotifier.userLogin(loginModel).then((response) {
                     if (response == true) {

@@ -1,7 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:shop_app/models/auth/signup_model.dart';
 import '../../shared/export_packages.dart';
 import '../../shared/export_files.dart';
-import 'dart:developer';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,22 +17,35 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController userNameCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController locationCtrl = TextEditingController();
+
+  final ImagePicker _picker = ImagePicker();
+  File? _profileImage;
 
   bool validation = false;
 
   void formValidation() {
-    if (emailCtrl.text.isNotEmpty &&
+    validation = emailCtrl.text.isNotEmpty &&
         passwordCtrl.text.isNotEmpty &&
-        userNameCtrl.text.isNotEmpty) {
-      validation = true;
-    } else {
-      validation = false;
+        userNameCtrl.text.isNotEmpty &&
+        locationCtrl.text.isNotEmpty;
+  }
+
+  Future<void> pickImage() async {
+    final XFile? picked =
+    await _picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
+
+    if (picked != null) {
+      setState(() {
+        _profileImage = File(picked.path);
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     var authNotifier = Provider.of<LoginNotifierProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -37,22 +53,19 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.black,
         toolbarHeight: 50.h,
         leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(AntDesign.close, size: 18, color: Colors.white),
+          onTap: () => Navigator.pop(context),
+          child: const Icon(Icons.close, color: Colors.white),
         ),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             opacity: 0.5,
             image: AssetImage("assets/images/bg.jpg"),
           ),
         ),
         child: ListView(
-          padding: EdgeInsets.zero,
           children: [
             ReusableText(
               text: "Welcome!",
@@ -62,107 +75,109 @@ class _RegisterPageState extends State<RegisterPage> {
               text: "Fill in your details to SignUp",
               style: appstyle(18.sp, FontWeight.normal, Colors.white),
             ),
-            SizedBox(height: 50.h),
+
+            SizedBox(height: 30.h),
+
+            // ---------------- PROFILE IMAGE PICKER ----------------
+            Center(
+              child: GestureDetector(
+                onTap: pickImage,
+                child: CircleAvatar(
+                  radius: 45,
+                  backgroundColor: Colors.white,
+                  backgroundImage:
+                  _profileImage != null ? FileImage(_profileImage!) : null,
+                  child: _profileImage == null
+                      ? const Icon(Icons.camera_alt, color: Colors.black)
+                      : null,
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10.h),
+            Center(
+              child: ReusableText(
+                text: "Tap to upload profile photo",
+                style: appstyle(12, FontWeight.normal, Colors.white),
+              ),
+            ),
+
+            SizedBox(height: 30.h),
+
             CustomField(
               hintText: "User Name",
               controller: userNameCtrl,
               keyboard: TextInputType.name,
-              validator: (username) {
-                if (username!.isEmpty) {
-                  return "Please provide a valid username";
-                } else {
-                  return null;
-                }
-              },
             ),
             SizedBox(height: 15.h),
+
             CustomField(
               hintText: "Email",
               controller: emailCtrl,
               keyboard: TextInputType.emailAddress,
-              validator: (email) {
-                if (email!.isEmpty && !email.contains("@")) {
-                  return "Please provide valid email";
-                } else {
-                  return null;
-                }
-              },
             ),
             SizedBox(height: 15.h),
+
             CustomField(
               obscureText: authNotifier.isObscure,
               hintText: "Password",
               controller: passwordCtrl,
               suffixIcon: GestureDetector(
-                onTap: () {
-                  authNotifier.isObscure = !authNotifier.isObscure;
-                },
-                child: authNotifier.isObscure
-                    ? Icon(Icons.visibility_off)
-                    : Icon(Icons.visibility),
-              ),
-              validator: (password) {
-                if (password!.isEmpty && password.length < 7) {
-                  return "Password too weak";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(height: 10.h),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                },
-                child: ReusableText(
-                  text: "Login",
-                  style: appstyle(14.sp, FontWeight.normal, Colors.white),
+                onTap: () =>
+                authNotifier.isObscure = !authNotifier.isObscure,
+                child: Icon(
+                  authNotifier.isObscure
+                      ? Icons.visibility_off
+                      : Icons.visibility,
                 ),
               ),
             ),
+            SizedBox(height: 15.h),
+
+            CustomField(
+              hintText: "Shipping Address",
+              controller: locationCtrl,
+              keyboard: TextInputType.text,
+            ),
+
             SizedBox(height: 40.h),
+
             GestureDetector(
               onTap: () {
                 formValidation();
-                if (validation) {
-                  log("form  valid.");
-                  SignUpModel signUpModel = SignUpModel(
-                    username: userNameCtrl.text,
-                    email: emailCtrl.text,
-                    password: passwordCtrl.text,
-                    location: 'Not set',
-                  );
-                  authNotifier.registerUser(signUpModel).then((response) {
-                    if (response == true) {
-                      log("Sign Up Done ");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
-                    } else {
-                      log("Failed to Sign Up ");
-                    }
-                  });
-                } else {
-                  log("form not valid.");
+                if (!validation) {
+                  log("form not valid");
+                  return;
                 }
+                log("IMAGE PATH: ${_profileImage?.path}");
+                final model = SignUpModel(
+                  username: userNameCtrl.text,
+                  email: emailCtrl.text,
+                  password: passwordCtrl.text,
+                  location: locationCtrl.text,
+                  profilePhoto: _profileImage, // 👈 pass image
+                );
+
+                authNotifier.registerUser(model).then((response) {
+                  if (response) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginPage()),
+                    );
+                  }
+                });
               },
               child: Container(
                 height: 55.h,
                 width: 300.h,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
-                child: Center(
-                  child: ReusableText(
-                    text: "REGISTER",
-                    style: appstyle(18.sp, FontWeight.normal, Colors.black),
+                child: const Center(
+                  child: Text(
+                    "REGISTER",
+                    style: TextStyle(color: Colors.black, fontSize: 18),
                   ),
                 ),
               ),

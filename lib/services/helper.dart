@@ -9,7 +9,7 @@ class Helper {
 
   // get kid sneakers data from local json file
   Future<List<Sneakers>> getKidSneakers() async {
-    var url = Uri.http(Config.apiUrl, Config.productsUrl);
+    var url = Uri.https(Config.apiUrl, Config.productsUrl);
     var response = await client.get(url);
     if (response.statusCode == 200) {
       //this will get all product
@@ -24,7 +24,7 @@ class Helper {
 
   // get men sneakers data from local json file
   Future<List<Sneakers>> getMenSneakers() async {
-    var url = Uri.http(Config.apiUrl, Config.productsUrl);
+    var url = Uri.https(Config.apiUrl, Config.productsUrl);
     var response = await client.get(url);
     if (response.statusCode == 200) {
       //this will get all product
@@ -39,7 +39,7 @@ class Helper {
 
   // get women sneakers data from local json file
   Future<List<Sneakers>> getWomenSneakers() async {
-    var url = Uri.http(Config.apiUrl, Config.productsUrl);
+    var url = Uri.https(Config.apiUrl, Config.productsUrl);
     var response = await client.get(url);
     if (response.statusCode == 200) {
       //this will get all product
@@ -55,7 +55,7 @@ class Helper {
   }
 
   Future<List<Sneakers>> search(String searchQuery) async {
-    var url = Uri.http(Config.apiUrl, "${Config.searchUrl}$searchQuery");
+    var url = Uri.https(Config.apiUrl, "${Config.searchUrl}$searchQuery");
     var response = await client.get(url);
     if (response.statusCode == 200) {
       //this will get searched  product

@@ -60,6 +60,7 @@ class LoginNotifierProvider extends ChangeNotifier {
     return response;
   }
 
+
   logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("userId");

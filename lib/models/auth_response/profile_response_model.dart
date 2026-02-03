@@ -11,12 +11,14 @@ class ProfileRes {
   final String? username;
   final String? email;
   final String? location;
+  final String? profilePhoto; // ✅ ADD THIS
 
   ProfileRes({
     this.id,
     this.username,
     this.email,
     this.location,
+    this.profilePhoto,
   });
 
   factory ProfileRes.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class ProfileRes {
       username: json['username']?.toString(),
       email: json['email']?.toString(),
       location: json['location']?.toString(),
+      profilePhoto: json['profilePhoto']?.toString(), // ✅
     );
   }
 
@@ -34,6 +37,7 @@ class ProfileRes {
       'username': username,
       'email': email,
       'location': location,
+      'profilePhoto': profilePhoto, // ✅
     };
   }
 }

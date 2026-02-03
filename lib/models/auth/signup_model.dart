@@ -1,10 +1,5 @@
 import 'dart:convert';
-
-SignUpModel signUpModelFromJson(String str) =>
-    SignUpModel.fromJson(json.decode(str));
-
-String signUpModelToJson(SignUpModel data) =>
-    json.encode(data.toJson());
+import 'dart:io';
 
 class SignUpModel {
   final String username;
@@ -12,28 +7,14 @@ class SignUpModel {
   final String password;
   final String? location;
 
+  // 👇 NEW
+  final File? profilePhoto;
+
   SignUpModel({
     required this.username,
     required this.email,
     required this.password,
     this.location,
+    this.profilePhoto,
   });
-
-  factory SignUpModel.fromJson(Map<String, dynamic> json) {
-    return SignUpModel(
-      username: json['username'] ?? '',
-      email: json['email'] ?? '',
-      password: json['password'] ?? '',
-      location: json['location'] ?? 'Not set',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'username': username,
-      'email': email,
-      'password': password,
-      'location': location,
-    };
-  }
 }

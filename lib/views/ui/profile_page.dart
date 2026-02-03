@@ -1,7 +1,9 @@
 import 'package:shop_app/services/auth_helper.dart';
 import 'package:shop_app/views/shared/export_files.dart';
-import 'package:shop_app/views/shared/export_packages.dart';
+import 'package:shop_app/views/shared/export_packages.dart' hide Config;
 import 'package:shop_app/views/ui/orders/orders_screen.dart';
+import 'package:shop_app/views/ui/shipping_address.dart';
+import '../../models/auth_response/profile_response_model.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,9 +13,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late Future<ProfileRes> _profileFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileFuture = AuthHelper().getProfileCached();
+  }
+
   @override
   Widget build(BuildContext context) {
     var authNotifier = Provider.of<LoginNotifierProvider>(context);
+    late ProfileRes userData;
     return authNotifier.loggedIn == false
         ? const NonUser()
         : Scaffold(
@@ -71,84 +82,54 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Row(
                                 children: [
-                                  SizedBox(
-                                    width: 35.w,
-                                    height: 35.h,
-                                    child: CircleAvatar(
-                                      backgroundImage: AssetImage(
-                                        "assets/images/user.jpg",
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 8.w),
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 5.0),
-                                    child: FutureBuilder(
-                                      future: AuthHelper().getProfileCached(),
-                                      builder: (context, snapShot) {
-                                        if (snapShot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Center(
-                                            child:
-                                                CircularProgressIndicator.adaptive(),
-                                          );
-                                        } else if (snapShot.hasError) {
-                                          print(
-                                            'Profile Error: ${snapShot.error}',
-                                          ); // Debug the error
-                                          return Center(
-                                            child: ReusableText(
-                                              text:
-                                                  "Error: ${snapShot.error.toString()}",
-                                              style: appstyle(
-                                                10,
-                                                FontWeight.bold,
-                                                Colors.red,
-                                              ),
-                                            ),
-                                          );
-                                        } else if (!snapShot.hasData) {
-                                          return Center(
-                                            child: ReusableText(
-                                              text: "No user data found",
-                                              style: appstyle(
-                                                14,
-                                                FontWeight.bold,
-                                                Colors.black,
-                                              ),
-                                            ),
-                                          );
-                                        } else {
-                                          final userData = snapShot.data;
-                                          return Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              ReusableText(
-                                                text:
-                                                    userData?.username ??
-                                                    "Username",
-                                                style: appstyle(
-                                                  16,
-                                                  FontWeight.normal,
-                                                  Colors.black,
-                                                ),
-                                              ),
-                                              ReusableText(
-                                                text:
-                                                    userData?.email ??
-                                                    "Email",
-                                                style: appstyle(
-                                                  12,
-                                                  FontWeight.normal,
-                                                  Colors.grey.shade600,
-                                                ),
-                                              ),
-                                            ],
-                                          );
+                                    child: ValueListenableBuilder(
+                                      valueListenable: Hive.box('userBox').listenable(keys: ['profile']),
+                                      builder: (context, box, _) {
+                                        final data = box.get('profile');
+
+                                        if (data == null) {
+                                          return const CircularProgressIndicator.adaptive();
                                         }
+
+                                        userData = ProfileRes.fromJson(
+                                          Map<String, dynamic>.from(data),
+                                        );
+
+                                        return Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 35.w,
+                                              height: 35.h,
+                                              child: CircleAvatar(
+                                                backgroundImage: userData.profilePhoto != null
+                                                    ? NetworkImage(
+                                                  "https://${Config.apiUrl}/${userData.profilePhoto}",
+                                                )
+                                                    : const AssetImage("assets/images/user.jpg")
+                                                as ImageProvider,
+                                              ),
+                                            ),
+                                            SizedBox(width: 8.w),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                ReusableText(
+                                                  text: userData.username ?? "Username",
+                                                  style: appstyle(16, FontWeight.normal, Colors.black),
+                                                ),
+                                                ReusableText(
+                                                  text: userData.email ?? "Email",
+                                                  style: appstyle(12, FontWeight.normal, Colors.grey.shade600),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
                                       },
                                     ),
+
                                   ),
                                 ],
                               ),
@@ -221,26 +202,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.h),
-                      Container(
-                        height: 110.h,
-                        color: Colors.grey.shade200,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TilesWidget(
-                              title: "Coupons",
-                              leading: MaterialCommunityIcons.tag_outline,
-                              onTap: () {},
-                            ),
-                            TilesWidget(
-                              title: "My Store",
-                              leading: MaterialCommunityIcons.shopping_outline,
-                              onTap: () {},
-                            ),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(height: 10.h),
+                      // Container(
+                      //   height: 110.h,
+                      //   color: Colors.grey.shade200,
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       TilesWidget(
+                      //         title: "Coupons",
+                      //         leading: MaterialCommunityIcons.tag_outline,
+                      //         onTap: () {},
+                      //       ),
+                      //       TilesWidget(
+                      //         title: "My Store",
+                      //         leading: MaterialCommunityIcons.shopping_outline,
+                      //         onTap: () {},
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(height: 10.h),
                       Container(
                         height: 160.h,
@@ -251,7 +232,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             TilesWidget(
                               title: "Shipping address",
                               leading: SimpleLineIcons.location_pin,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ShippingAddress(),
+                                  ),
+                                );
+                              },
                             ),
                             TilesWidget(
                               title: "Settings",

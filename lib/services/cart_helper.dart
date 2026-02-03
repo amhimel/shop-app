@@ -23,7 +23,7 @@ class CartHelper {
       'token': 'Bearer $userToken',
     };
 
-    var url = Uri.http(Config.apiUrl, Config.addCartUrl);
+    var url = Uri.https(Config.apiUrl, Config.addCartUrl);
     var response = await client.post(
       url,
       headers: requestHeaders,
@@ -53,7 +53,7 @@ class CartHelper {
       'token': 'Bearer $userToken',
     };
 
-    var url = Uri.http(Config.apiUrl, "${Config.addCartUrl}/$id");
+    var url = Uri.https(Config.apiUrl, "${Config.addCartUrl}/$id");
     var response = await client.delete(url, headers: requestHeaders);
 
     print('Token: $userToken');
@@ -79,7 +79,7 @@ class CartHelper {
       'token': 'Bearer $userToken',
     };
 
-    var url = Uri.http(Config.apiUrl, Config.getCartUrl);
+    var url = Uri.https(Config.apiUrl, Config.getCartUrl);
     var response = await client.get(url, headers: requestHeaders);
 
     print('Token: $userToken');
@@ -111,7 +111,7 @@ class CartHelper {
       'token': 'Bearer $userToken',
     };
 
-    final url = Uri.http(Config.apiUrl, Config.ordersUrl);
+    final url = Uri.https(Config.apiUrl, Config.ordersUrl);
     final response = await client.get(url, headers: headers);
 
     log("Response Status: ${response.statusCode}");
