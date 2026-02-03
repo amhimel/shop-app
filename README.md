@@ -102,7 +102,7 @@ This project uses **two separate backend repositories**, each with a clear respo
 ## 🎥 Demo
 
 <p>
-  <img src="./screenshots/demo.gif" width="420" alt="Shop App Demo"/>
+  <img src="assets/files/screenshots//demo.gif" width="420" alt="Shop App Demo"/>
 </p>
 
 ---
