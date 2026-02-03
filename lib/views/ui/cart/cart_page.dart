@@ -457,6 +457,7 @@ class _CartPageState extends State<CartPage> {
                                 paymentNotifier.setPaymentUrl = value;
                                 log("payment ${paymentNotifier.paymentUrl}");
                               });
+                              //Navigator.pop(context);
                             },
                           ),
                         )

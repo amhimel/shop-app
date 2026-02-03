@@ -448,7 +448,7 @@ class _ProductPageState extends State<ProductPage> {
                                               //   "qty": 1,
                                               // });
                                               //productNotifierProvider.sizes.clear();
-                                              //Navigator.pop(context);
+                                              Navigator.pop(context);
                                             } else {
                                               Navigator.push(
                                                 context,
